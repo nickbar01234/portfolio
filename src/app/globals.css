@@ -19,9 +19,3 @@
     background: rgb(105, 109, 119, 0.3);
   }
 }
-
-body {
-  height: 100vh;
-  width: 100vw;
-  overscroll-behavior-y: none;
-}

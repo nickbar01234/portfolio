@@ -3,7 +3,7 @@ import { hash } from "@/utils";
 import { createHash } from "crypto";
 
 const Tutorial: Component = () => {
-  return <>hello</>;
+  return <></>;
 };
 
 Tutorial.displayName = "Tutorial";

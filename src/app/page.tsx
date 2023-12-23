@@ -1,25 +1,36 @@
 "use client";
 
 import React from "react";
-import TabNavigation, { Tutorial, Intro } from "./_components/tabs";
-import { Footer } from "./_components/index";
+import { useRouter } from "next/navigation";
+import { ProgramItem } from "@/components/computer";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCog } from "@fortawesome/free-solid-svg-icons";
+import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
+import { openNewTab } from "@/utils";
 
 // ╰─➤  curl -s "https://api.github.com/repos/nickbar01234/config/commits?paths=lvim%2Fconfig.lua&per_page=1&page=1"                                                                                           130 ↵
-const Home = () => {
+const Page = () => {
+  const router = useRouter();
+
   return (
-    <div className="h-full w-full flex items-center justify-center">
-      <div className="rounded-md flex flex-col bg-bg h-5/6 w-5/6 shadow-2xl shadow-comment">
-        <div className="p-2 h-full overflow-y-scroll scrollbar">
-          <TabNavigation tabs={[Tutorial, Intro]} activeId={Tutorial.id} />
-          <div className="overflow-y-scroll scrollbar">hi</div>
-        </div>
-        <div className="mt-auto w-full">
-          {/* TODO(nickbar01234) - Dynamic date */}
-          <Footer author="nickbar01234" lastModified={new Date("2023-01-01")} />
-        </div>
-      </div>
+    <div className="p-4 h-full flex flex-col flex-wrap gap-4 content-start">
+      <ProgramItem
+        icon={<FontAwesomeIcon icon={faCog} size="lg" />}
+        name="a.out"
+        onClick={() => router.push("/portfolio")}
+      />
+      <ProgramItem
+        icon={<FontAwesomeIcon icon={faGithub} size="lg" />}
+        name="Projects"
+        onClick={() => openNewTab("https://github.com/nickbar01234")}
+      />
+      <ProgramItem
+        icon={<FontAwesomeIcon icon={faLinkedin} size="lg" />}
+        name="Social"
+        onClick={() => openNewTab("https://www.linkedin.com/in/nick-huy-doan/")}
+      />
     </div>
   );
 };
 
-export default Home;
+export default Page;

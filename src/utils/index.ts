@@ -31,3 +31,7 @@ export const hash = (value: string, algorithm: string = "sha1") => {
     .digest()
     .toString("base64");
 };
+
+export const openNewTab = (url: string) => {
+  window.open(url, "_blank", "noreferrer");
+};

@@ -5,6 +5,7 @@ import "@fortawesome/fontawesome-svg-core/styles.css";
 import MediaLink from "@/components/layout/MediaLink";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import Monitor from "@/components/computer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,15 +17,10 @@ const metadata: Metadata = {
 const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <div className="grid grid-cols-12 h-full w-full bg-bg-variant text-text">
-          <div className="col-span-1 flex justify-center">
-            <div className="fixed bottom-0">
-              <MediaLink />
-            </div>
-          </div>
-          <div className="col-span-11">{children}</div>
-        </div>
+      <body
+        className={`${inter.className} overscroll-none overflow-hidden h-screen w-screen bg-bg-variant text-text p-12`}
+      >
+        <Monitor>{children}</Monitor>
       </body>
     </html>
   );

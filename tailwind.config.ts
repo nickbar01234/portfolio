@@ -7,6 +7,7 @@ const config: Config = {
       // Monokai theme
       bg: "#282a3a",
       "bg-variant": "#1e1f2b",
+      "bg-highlight": "#161821",
       text: "#eaf2f1",
       comment: "#696d77",
       active: "#ffd76d",
