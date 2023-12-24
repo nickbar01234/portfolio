@@ -1,16 +1,14 @@
 "use client";
 
 import { Footer } from "@/components";
-import TabNavigation, {
-  Intro,
-  Tutorial,
-} from "@/components/programs/portfolio/tabs";
+import TabNavigation, { Tutorial } from "@/components/programs/portfolio/tabs";
 
 const Portfolio = () => {
   return (
     <div className="flex flex-col h-full w-full">
       <div className="p-2 h-full overflow-y-scroll scrollbar">
-        <TabNavigation tabs={[Tutorial, Intro]} activeId={Tutorial.id} />
+        <TabNavigation tabs={[Tutorial]} activeId={Tutorial.id} />
+        <Tutorial />
       </div>
       <div className="mt-auto w-full">
         {/* TODO(nickbar01234) - Dynamic information */}

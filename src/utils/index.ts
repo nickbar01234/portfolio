@@ -1,4 +1,5 @@
 import { createHash } from "crypto";
+
 type Time = Record<string, number>;
 
 export const timeBetween = (since: Date) => {
