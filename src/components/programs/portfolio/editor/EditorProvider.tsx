@@ -1,5 +1,6 @@
 "use client";
 import { createContext, useState } from "react";
+import { NumberedLine } from ".";
 
 interface EditorProviderProps {
   children?: React.ReactNode;
@@ -17,7 +18,9 @@ const EditorProvider = (props: EditorProviderProps) => {
 
   return (
     <EditorContext.Provider value={{ ids: ids, setIds: setIds }}>
-      <div className="h-full w-full pt-4">{props.children}</div>
+      <div className="flex flex-col h-full overflow-y-auto scrollbar pt-4 pl-2">
+        {props.children}
+      </div>
     </EditorContext.Provider>
   );
 };
