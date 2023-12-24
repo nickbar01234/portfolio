@@ -1,10 +1,10 @@
-interface ProgramProps {
+interface DesktopItem {
   icon: React.ReactNode;
   name: string;
   onClick: (e: React.MouseEvent) => void;
 }
 
-const ProgramItem = (props: ProgramProps) => {
+const DesktopItem = (props: DesktopItem) => {
   return (
     <div
       className="flex flex-col gap-y-2 items-center text-center w-20 flex-grow-0 cursor-pointer hover:text-active"
@@ -16,4 +16,4 @@ const ProgramItem = (props: ProgramProps) => {
   );
 };
 
-export default ProgramItem;
+export default DesktopItem;

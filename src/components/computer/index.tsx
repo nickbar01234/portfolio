@@ -1,4 +1,4 @@
 import Monitor from "./Monitor";
 
 export default Monitor;
-export { default as ProgramItem } from "./ProgramItem";
+export { default as DesktopItem } from "./DesktopItem";
