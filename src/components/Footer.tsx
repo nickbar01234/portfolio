@@ -22,7 +22,7 @@ const Footer = (props: FooterProps) => {
   }, [props.lastModified]);
 
   return (
-    <div className="flex items-center justify-between p-2 w-full bg-bg-variant drop-shadow-lg h-full">
+    <div className="flex items-center justify-between p-2 w-full bg-bg-variant drop-shadow-lg h-full text-sm">
       <span className="uppercase">-- normal --</span>
       <span>
         Blame {props.author} ({timeSinceLastModified})
