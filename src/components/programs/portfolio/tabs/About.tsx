@@ -2,7 +2,7 @@ import { Component } from "@/type";
 import { hash } from "@/utils";
 import React from "react";
 
-const Intro: Component = () => {
+const About: Component = () => {
   return (
     <>
       <p className="text-primary text-xl">Hi, my name is</p>
@@ -11,7 +11,7 @@ const Intro: Component = () => {
   );
 };
 
-Intro.displayName = "Intro";
-Intro.id = hash(Intro.displayName);
+About.displayName = "About";
+About.id = hash(About.displayName);
 
-export default Intro;
+export default About;

@@ -1,14 +1,17 @@
-interface HelpMenuProps {
-  display: boolean;
-}
+"use client";
 
-const HelpMenu = (props: HelpMenuProps) => {
-  if (!props.display) {
+import React from "react";
+import PopUp from "./PopUp";
+
+const HelpMenu = () => {
+  const [displayHelp, setDisplayHelp] = React.useState(false);
+
+  if (!displayHelp) {
     return null;
   }
 
   return (
-    <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-3/6 h-4/6 bg-bg-variant shadow-lg shadow-comment rounded p-2 whitespace-nowrap">
+    <PopUp setDisplayPopUp={setDisplayHelp}>
       <div className="h-full w-full flex flex-col">
         <div className="flex w-full justify-center border-b-2 border-b-comment">
           Key Maps
@@ -34,7 +37,7 @@ const HelpMenu = (props: HelpMenuProps) => {
           </div>
         </div>
       </div>
-    </div>
+    </PopUp>
   );
 };
 

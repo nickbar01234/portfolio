@@ -1,15 +1,14 @@
 "use client";
 
-import { Tutorial } from "@/components/programs/portfolio/tabs";
+import { About, Tutorial } from "@/components/programs/portfolio/tabs";
 import { HelpMenu, Footer } from "./editor";
 import React from "react";
 import { SideBar, TabBar } from "./navigation";
 import { useClosePortfolio } from "@/hooks";
 
-const FILES = [Tutorial];
+const FILES = [Tutorial, About];
 
 const Portfolio = () => {
-  const [showHelpMenu, setShowHelpMenu] = React.useState(false);
   const [tabs, setTabs] = React.useState([Tutorial]);
   const [activeTabId, setActiveTabId] = React.useState(Tutorial.id);
 
@@ -23,13 +22,22 @@ const Portfolio = () => {
 
   return (
     <div className="h-full w-full grid grid-cols-[4%_96%]">
+      <HelpMenu />
       <div className="h-full w-full bg-bg-variant py-2 border-r-2 border-r-bg-highlight">
-        <SideBar files={FILES} />
+        <SideBar
+          files={FILES}
+          setTabs={setTabs}
+          setActiveTabId={setActiveTabId}
+        />
       </div>
       <div className="h-full w-full grid grid-rows-[5%_87%_8%] overflow-y-hidden overflow-x-auto scrollbar">
         <div className="pt-2 pl-2">
-          <TabBar tabs={tabs} setTabs={setTabs} activeTabId={activeTabId} />
-          <HelpMenu display={showHelpMenu} />
+          <TabBar
+            tabs={tabs}
+            setTabs={setTabs}
+            activeTabId={activeTabId}
+            setActiveTabId={setActiveTabId}
+          />
         </div>
         {activeTab}
         <Footer author="nickbar01234" lastModified={new Date("2023-01-01")} />

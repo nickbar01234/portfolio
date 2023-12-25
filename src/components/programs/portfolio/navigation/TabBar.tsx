@@ -8,21 +8,27 @@ interface TabNavigationProps {
   tabs: Component[];
   setTabs: React.Dispatch<React.SetStateAction<Component[]>>;
   activeTabId: string;
+  setActiveTabId: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const TabBar = (props: TabNavigationProps) => {
-  const { tabs, setTabs, activeTabId } = props;
+  const { tabs, setTabs, activeTabId, setActiveTabId } = props;
 
-  const onTabSelect = React.useCallback(() => {
-    console.log("Tab select");
-  }, []);
+  const onTabSelect = React.useCallback(
+    (id: string) => {
+      setActiveTabId(id);
+    },
+    [setActiveTabId]
+  );
 
   const onTabClose = React.useCallback(
     (event: React.MouseEvent) => {
       event.stopPropagation();
       setTabs((tabs) => tabs.filter((tab) => tab.id !== activeTabId));
+      // TODO(nickbar01234) - Add history stack
+      setActiveTabId((prev) => tabs.find((tab) => tab.id !== prev)?.id ?? "");
     },
-    [activeTabId, setTabs]
+    [tabs, activeTabId, setTabs, setActiveTabId]
   );
 
   return (
@@ -32,11 +38,11 @@ const TabBar = (props: TabNavigationProps) => {
           const isActive = tab.id === activeTabId;
           return (
             <div
-              className={`text-sm flex items-center gap-x-1.5 hover:text-[#535763] hover:border-b hover:border-b-comment cursor-pointer ${
+              className={`text-sm flex items-center gap-x-1.5 hover:comment-variant hover:border-b hover:border-b-comment cursor-pointer ${
                 isActive && "border-b border-active text-active"
               }`}
               key={tab.id}
-              onClick={onTabSelect}
+              onClick={() => onTabSelect(tab.id)}
             >
               <FontAwesomeIcon icon={faReact} color="#61dbfb" />
               <span className="text-text">{tab.displayName}</span>

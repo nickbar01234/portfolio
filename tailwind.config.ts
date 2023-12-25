@@ -10,6 +10,7 @@ const config: Config = {
       "bg-highlight": "#161821",
       text: "#eaf2f1",
       comment: "#696d77",
+      "comment-variant": "#535763",
       active: "#ffd76d",
       keyword: "#ff657a",
       variable: "#9cd1bb",
