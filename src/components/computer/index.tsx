@@ -1,4 +1,2 @@
-import Monitor from "./Monitor";
-
-export default Monitor;
+export { default } from "./Monitor";
 export { default as DesktopItem } from "./DesktopItem";

@@ -9,7 +9,7 @@ interface TabNavigationProps {
   activeId: string;
 }
 
-const TabNavigation = (props: TabNavigationProps) => {
+const TabBar = (props: TabNavigationProps) => {
   const { tabs, activeId } = props;
 
   const onTabSelect = React.useCallback(() => {
@@ -22,7 +22,7 @@ const TabNavigation = (props: TabNavigationProps) => {
   }, []);
 
   return (
-    <div className="w-full bg-bg">
+    <div className="relative z-50 w-full bg-bg">
       <div className="flex gap-x-4">
         {tabs.map((tab) => {
           const isActive = tab.id === activeId;
@@ -52,4 +52,4 @@ const TabNavigation = (props: TabNavigationProps) => {
   );
 };
 
-export default TabNavigation;
+export default TabBar;

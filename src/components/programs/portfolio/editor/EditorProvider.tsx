@@ -18,7 +18,7 @@ const EditorProvider = (props: EditorProviderProps) => {
 
   return (
     <EditorContext.Provider value={{ ids: ids, setIds: setIds }}>
-      <div className="flex flex-col h-full pt-4 pl-2">
+      <div className="relative z-0 flex flex-col h-full pl-2">
         <div className="h-full overflow-y-auto scrollbar">{props.children}</div>
       </div>
     </EditorContext.Provider>

@@ -1,1 +1,1 @@
-export { default as Portfolio } from "./portfolio";
+export { default } from "./portfolio";
