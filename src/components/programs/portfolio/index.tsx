@@ -3,18 +3,19 @@
 import { Footer } from "@/components";
 import TabNavigation, { Tutorial } from "@/components/programs/portfolio/tabs";
 import { HelpMenu } from "./editor";
+import React from "react";
 
 const Portfolio = () => {
+  const [showHelpMenu, setShowHelpMenu] = React.useState(false);
+
   return (
-    <div className="h-full w-full grid grid-rows-12">
-      <div className="pt-2 pl-2 row-span-1">
+    <div className="h-full w-full grid grid-rows-[8%_84%_8%] overflow-y-hidden overflow-x-auto scrollbar">
+      <div className="pt-2 pl-2">
         <TabNavigation tabs={[Tutorial]} activeId={Tutorial.id} />
-        <HelpMenu display />
+        <HelpMenu display={showHelpMenu} />
       </div>
-      <div className="row-span-10 overflow-y-hidden">
-        <Tutorial />
-      </div>
-      <div className="row-span-1">
+      <Tutorial />
+      <div className="">
         <Footer author="nickbar01234" lastModified={new Date("2023-01-01")} />
       </div>
     </div>
