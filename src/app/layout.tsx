@@ -17,7 +17,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <html lang="en">
       <body
-        className={`${inter.className} overscroll-none overflow-hidden h-screen w-screen bg-bg-variant text-text md:p-12 p-2 flex justify-center`}
+        className={`${inter.className} overscroll-none h-screen w-screen bg-bg-variant text-text md:p-12 py-12 flex justify-center`}
       >
         <Monitor>{children}</Monitor>
       </body>

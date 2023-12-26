@@ -40,7 +40,7 @@ const App = () => {
       <div className="h-full w-full bg-bg-variant py-2 border-r-2 border-r-bg-highlight">
         <SideBar setTabs={setTabs} setActiveTabId={setActiveTabId} />
       </div>
-      <div className="h-full w-full grid grid-rows-[5%_87%_8%] overflow-y-hidden overflow-x-auto scrollbar">
+      <div className="h-full w-full grid grid-rows-[5%_87%_8%] overflow-y-hidden overscroll-none overflow-x-auto scrollbar">
         <div className="pt-2 pl-2">
           <TabBar
             tabs={tabs}

@@ -1,7 +1,7 @@
 import Portfolio from "@/components/programs";
 
 const Page = () => {
-  return <Portfolio></Portfolio>;
+  return <Portfolio />;
 };
 
 export default Page;

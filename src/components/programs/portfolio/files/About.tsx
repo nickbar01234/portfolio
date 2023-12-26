@@ -29,32 +29,29 @@ const About: Component = ({ active, typingCommand }) => {
       <NumberedLine />
       <NumberedLine />
       <NumberedLine>
-        <div className="flex gap-x-8">
-          <pre>
-            <Syntax.Decl>let</Syntax.Decl> <Syntax.Id>coffee</Syntax.Id>{" "}
-            <Syntax.Keyword>=</Syntax.Keyword>{" "}
-            <Syntax.Keyword>await</Syntax.Keyword>{" "}
-            <Syntax.Call>brewing</Syntax.Call>
-            <Syntax.Paren1 />
-            <Syntax.Comment>;</Syntax.Comment>
-          </pre>
-          <pre>
-            {`   {
-    {   }
-    }_{ __{
- .-{   }   }-.
-(   }     {   )
-|\`-.._____..-'|
-|             ;--.
-|            (__  \\
-|             | )  )
-|             |/  /
-|             /  /
-|            (  /
- \\            y'
-  \`-.._____..-'`}
-          </pre>
-        </div>
+        <pre>
+          <Syntax.Decl>let</Syntax.Decl> <Syntax.Id>coffee</Syntax.Id>{" "}
+          <Syntax.Keyword>=</Syntax.Keyword>{" "}
+          <Syntax.Keyword>await</Syntax.Keyword>{" "}
+          <Syntax.Call>brewing</Syntax.Call>
+          <Syntax.Paren1 />
+          <Syntax.Comment>;</Syntax.Comment>
+          {`   
+    {
+      {   }
+      }_{ __{
+  .-{   }   }-.
+  (   }     {   )
+  |\`-.._____..-'|
+  |             ;--.
+  |            (__  \\
+  |             | )  )
+  |             |/  /
+  |             /  /
+  |            (  /
+  \\             y'
+    \`-.._____..-'`}
+        </pre>
       </NumberedLine>
       <NumberedLine />
     </EditorProvider>
