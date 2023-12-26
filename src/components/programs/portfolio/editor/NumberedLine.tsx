@@ -6,7 +6,7 @@ interface NumberedLineProps {
 }
 
 const NumberedLine = ({ children }: NumberedLineProps) => {
-  const { ids, setIds } = useContext(EditorContext);
+  const { ids, setIds, activeId } = useContext(EditorContext);
   const id = React.useId();
 
   React.useEffect(() => {
@@ -14,7 +14,11 @@ const NumberedLine = ({ children }: NumberedLineProps) => {
   }, [id, setIds]);
 
   return (
-    <div className="w-full flex gap-x-6">
+    <div
+      className={`w-full flex gap-x-6 ${
+        id === activeId && "bg-comment-variant bg-opacity-30"
+      }`}
+    >
       <div className="w-4 text-right align-top">
         <span className="text-comment text-sm">{ids.indexOf(id)}</span>
       </div>

@@ -11,7 +11,7 @@ const PopUp = (props: PopUpProps) => {
           className="rounded-full h-2.5 w-2.5 bg-keyword cursor-pointer"
           onClick={() => props.setDisplayPopUp(false)}
         />
-        <i className="rounded-full h-2.5 w-2.5 bg-variable cursor-pointer" />
+        <i className="rounded-full h-2.5 w-2.5 bg-decl cursor-pointer" />
       </div>
       {props.children}
     </div>

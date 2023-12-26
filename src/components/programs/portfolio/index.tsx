@@ -1,6 +1,6 @@
 "use client";
 
-import { About, Tutorial } from "@/components/programs/portfolio/tabs";
+import { About, Tutorial } from "@/components/programs/portfolio/files";
 import { HelpMenu, Footer } from "./editor";
 import React from "react";
 import { SideBar, TabBar } from "./navigation";

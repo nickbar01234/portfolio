@@ -15,7 +15,7 @@ const Directory = (props: SideBarProps) => {
       {files.map((file) => (
         <div
           key={file.id}
-          className="flex gap-x-1.5 items-center hover:bg-comment-variant cursor-pointer"
+          className="flex gap-x-1.5 items-center hover:bg-comment-variant hover:bg-opacity-30 cursor-pointer"
           onClick={() => onFileClick(file)}
         >
           <FontAwesomeIcon icon={faReact} color="#61dbfb" />

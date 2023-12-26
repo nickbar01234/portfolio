@@ -46,14 +46,14 @@ const TabBar = (props: TabNavigationProps) => {
             >
               <FontAwesomeIcon icon={faReact} color="#61dbfb" />
               <span className="text-text">{tab.displayName}</span>
-              {isActive && (
-                <FontAwesomeIcon
-                  icon={faX}
-                  size="xs"
-                  className="cursor-pointer"
-                  onClick={onTabClose}
-                />
-              )}
+              <FontAwesomeIcon
+                icon={faX}
+                size="xs"
+                className={`cursor-pointer ${
+                  isActive ? "visible" : "invisible"
+                }`}
+                onClick={onTabClose}
+              />
             </div>
           );
         })}
