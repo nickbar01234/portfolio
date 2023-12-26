@@ -3,9 +3,9 @@ import { hash } from "@/utils";
 import React from "react";
 import EditorProvider, { NumberedLine } from "../editor";
 
-const About: Component = () => {
+const About: Component = ({ active }) => {
   return (
-    <EditorProvider>
+    <EditorProvider active={active}>
       <NumberedLine>
         <pre>
           <span className="text-decl">const</span>{" "}

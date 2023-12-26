@@ -36,3 +36,8 @@ export const hash = (value: string, algorithm: string = "sha1") => {
 export const openNewTab = (url: string) => {
   window.open(url, "_blank", "noreferrer");
 };
+
+export const isTrueKeyPress = (key: string) => {
+  return (event: KeyboardEvent) =>
+    event.key === key && !event.shiftKey && !event.ctrlKey;
+};

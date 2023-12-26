@@ -17,7 +17,7 @@ const Portfolio = () => {
   const activeTab = React.useMemo(() => {
     const ActiveTab = tabs.find((tab) => tab.id === activeTabId);
     // Add dummy element to maintain grid
-    return ActiveTab != null ? <ActiveTab /> : <div></div>;
+    return ActiveTab != null ? <ActiveTab active /> : <div></div>;
   }, [activeTabId, tabs]);
 
   return (
@@ -39,7 +39,13 @@ const Portfolio = () => {
             setActiveTabId={setActiveTabId}
           />
         </div>
-        {activeTab}
+        {tabs.length === 0 ? (
+          <div></div>
+        ) : (
+          FILES.map((File) => (
+            <File active={File.id === activeTabId} key={File.id} />
+          ))
+        )}
         <Footer author="nickbar01234" lastModified={new Date("2023-01-01")} />
       </div>
     </div>

@@ -2,9 +2,9 @@ import { Component } from "@/type";
 import { hash } from "@/utils";
 import EditorProvider, { NumberedLine } from "../editor";
 
-const Tutorial: Component = () => {
+const Tutorial: Component = ({ active }) => {
   return (
-    <EditorProvider>
+    <EditorProvider active={active}>
       <NumberedLine>
         <pre className="text-comment">
           {`/**
