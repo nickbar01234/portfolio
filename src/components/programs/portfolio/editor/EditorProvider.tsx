@@ -1,6 +1,7 @@
 "use client";
 import { useVerticalMovement } from "@/hooks/vim";
 import React from "react";
+import { NumberedLine } from ".";
 
 interface EditorProviderProps {
   children?: React.ReactNode;
@@ -51,7 +52,10 @@ const EditorProvider = (props: EditorProviderProps) => {
           active ? "block" : "hidden"
         }`}
       >
-        <div className="h-full overflow-y-auto scrollbar">{props.children}</div>
+        <div className="h-full overflow-y-auto scrollbar">
+          {props.children}
+          <NumberedLine />
+        </div>
       </div>
     </EditorContext.Provider>
   );

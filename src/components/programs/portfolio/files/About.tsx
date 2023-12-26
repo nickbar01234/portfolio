@@ -97,7 +97,6 @@ const About: Component = ({ active, typingCommand }) => {
           <Syntax.Comment>;</Syntax.Comment>
         </pre>
       </NumberedLine>
-      <NumberedLine />
     </EditorProvider>
   );
 };
