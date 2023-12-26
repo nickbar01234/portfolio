@@ -2,7 +2,6 @@ import "./globals.css";
 // Override style
 // {@link https://stackoverflow.com/questions/66539699/fontawesome-icons-not-working-properly-in-react-next-app}
 import "@fortawesome/fontawesome-svg-core/styles.css";
-import MediaLink from "@/components/layout/MediaLink";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Monitor from "@/components/computer";
