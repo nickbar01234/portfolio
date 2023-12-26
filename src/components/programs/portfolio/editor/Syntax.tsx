@@ -28,6 +28,7 @@ const Syntax = {
   Call: withTextColor("text-call"),
   Comment: withTextColor("text-comment"),
   String: withTextColor("text-active"),
+  Text: withTextColor("text-text"),
 
   Paren1: withParenthesis("text-bracket-1"),
 };

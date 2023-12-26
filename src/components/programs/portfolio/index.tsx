@@ -34,13 +34,13 @@ const App = () => {
   useClosePortfolio({ tabs });
 
   return (
-    <div className="h-full w-full grid grid-cols-[4%_96%]">
+    <div className="h-full w-full grid sm:grid-cols-[5%_95%] sm:grid-rows-1 grid-rows-[5%_95%]">
       <HelpMenu displayHelp={displayHelp} setDisplayHelp={setDisplayHelp} />
       <Directory onFileClick={onFileClick} />
       <div className="h-full w-full bg-bg-variant py-2 border-r-2 border-r-bg-highlight">
         <SideBar setTabs={setTabs} setActiveTabId={setActiveTabId} />
       </div>
-      <div className="h-full w-full grid grid-rows-[5%_87%_8%] overflow-y-hidden overscroll-none overflow-x-auto scrollbar">
+      <div className="h-full w-full grid md:grid-rows-[5%_87%_8%] grid-rows-[10%_80%_10%] overflow-y-hidden overscroll-none">
         <div className="pt-2 pl-2">
           <TabBar
             tabs={tabs}
@@ -49,17 +49,21 @@ const App = () => {
             setActiveTabId={setActiveTabId}
           />
         </div>
-        {tabs.length === 0 ? (
-          <div></div>
-        ) : (
-          files.map((File) => (
-            <File
-              active={File.id === activeTabId}
-              key={File.id}
-              typingCommand={commandListenerActive}
-            />
-          ))
-        )}
+        <div className="h-full w-full overflow-x-auto scrollbar">
+          <div className="min-w-max">
+            {tabs.length === 0 ? (
+              <div></div>
+            ) : (
+              files.map((File) => (
+                <File
+                  active={File.id === activeTabId}
+                  key={File.id}
+                  typingCommand={commandListenerActive}
+                />
+              ))
+            )}
+          </div>
+        </div>
         <Footer
           author="nickbar01234"
           lastModified={new Date("2023-01-01")}

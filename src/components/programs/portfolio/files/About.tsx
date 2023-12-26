@@ -3,10 +3,19 @@
  */
 import { Component } from "@/type";
 import { hash } from "@/utils";
-import React from "react";
+import React, { useState } from "react";
 import EditorProvider, { NumberedLine, Syntax } from "../editor";
 
 const About: Component = ({ active, typingCommand }) => {
+  const [procastinateFor, setProcastinateFor] = useState(0);
+
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      setProcastinateFor((prev) => prev + 1);
+    }, 1000);
+    return () => clearInterval(interval);
+  });
+
   return (
     <EditorProvider active={active} typingCommand={typingCommand}>
       <NumberedLine>
@@ -37,8 +46,8 @@ const About: Component = ({ active, typingCommand }) => {
           <Syntax.Paren1 />
           <Syntax.Comment>;</Syntax.Comment>
           {`   
-    {
-      {   }
+     {
+      {  }
       }_{ __{
   .-{   }   }-.
   (   }     {   )
@@ -54,6 +63,40 @@ const About: Component = ({ active, typingCommand }) => {
         </pre>
       </NumberedLine>
       <NumberedLine />
+      <NumberedLine>
+        <pre>
+          <Syntax.Decl>var</Syntax.Decl> <Syntax.Id>work</Syntax.Id>{" "}
+          <Syntax.Keyword>= ()</Syntax.Keyword>{" "}
+          <Syntax.Keyword>=&gt;</Syntax.Keyword>{" "}
+          <Syntax.Call>setTimeout</Syntax.Call>
+          <Syntax.Paren1>
+            <Syntax.Text>procastinate</Syntax.Text>
+            <Syntax.Comment>,</Syntax.Comment> <Syntax.Id>0</Syntax.Id>
+          </Syntax.Paren1>
+          <Syntax.Comment>;</Syntax.Comment>
+        </pre>
+      </NumberedLine>
+      <NumberedLine>
+        <pre>
+          <Syntax.Decl>var</Syntax.Decl> <Syntax.Id>procastinate</Syntax.Id>{" "}
+          <Syntax.Keyword>= ()</Syntax.Keyword>{" "}
+          <Syntax.Keyword>=&gt;</Syntax.Keyword>{" "}
+          <Syntax.Call>setTimeout</Syntax.Call>
+          <Syntax.Paren1>
+            <Syntax.Text>work</Syntax.Text>
+            <Syntax.Comment>,</Syntax.Comment>{" "}
+            <Syntax.Id className="animate-pulse">{procastinateFor}</Syntax.Id>
+          </Syntax.Paren1>
+          <Syntax.Comment>;</Syntax.Comment>
+        </pre>
+      </NumberedLine>
+      <NumberedLine>
+        <pre>
+          <Syntax.Call>work</Syntax.Call>
+          <Syntax.Paren1 />
+          <Syntax.Comment>;</Syntax.Comment>
+        </pre>
+      </NumberedLine>
     </EditorProvider>
   );
 };

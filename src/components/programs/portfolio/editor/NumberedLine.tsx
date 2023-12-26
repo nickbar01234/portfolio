@@ -22,7 +22,7 @@ const NumberedLine = ({ children }: NumberedLineProps) => {
 
   return (
     <div
-      className={`w-full flex gap-x-6 ${
+      className={`w-full flex sm:gap-x-6 gap-x-2 ${
         id === activeId && "bg-comment-variant bg-opacity-30"
       }`}
       onClick={() => setActiveId(id)}

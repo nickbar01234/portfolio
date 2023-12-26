@@ -2,8 +2,6 @@ import { Component } from "@/type";
 import { faFolder } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
-import { PopUp } from "../editor";
-import Directory from "./Directory";
 import { PortfolioContext } from "@/components/programs";
 
 interface SideBarProps {
@@ -20,7 +18,7 @@ const SideBar = (props: SideBarProps) => {
     directory;
 
   return (
-    <div className="h-full w-full flex flex-col text-center gap-y-2">
+    <div className="h-full w-full flex flex-col justify-center items-center text-center gap-y-2">
       <FontAwesomeIcon
         icon={faFolder}
         className="cursor-pointer"

@@ -26,28 +26,16 @@ const ACTIONS = [
     description: "New tab",
   },
   {
-    command: "!ls",
+    command: ":!ls",
     description: "Directory",
   },
   {
-    command: ":q",
-    description: "Quit",
+    command: "j",
+    description: "Down",
   },
   {
-    command: ":help",
-    description: "Help",
-  },
-  {
-    command: (
-      <span>
-        :tabnew <span className="text-keyword">file</span>
-      </span>
-    ),
-    description: "New tab",
-  },
-  {
-    command: "!ls",
-    description: "Directory",
+    command: "k",
+    description: "Up",
   },
 ];
 const HelpMenu = ({ displayHelp, setDisplayHelp }: HelpMenuProps) => {

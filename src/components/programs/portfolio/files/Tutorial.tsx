@@ -8,15 +8,12 @@ const Tutorial: Component = ({ active, typingCommand }) => {
       <NumberedLine>
         <pre className="text-comment">
           {`/**
- * Hey there, thanks for coming.
+ * My fav editors + themes, all in 1.
  *
- * Navigate with either Vim bindings or mouse clicks.
- * 
- * Hope you will enjoy the experience :)
- * 
- * To begin, type`}{" "}
+ * Navigate with mouse or type`}{" "}
           <span className="text-keyword">:help</span>{" "}
           {`
+ * to move with Vim.
  */`}
         </pre>
       </NumberedLine>
