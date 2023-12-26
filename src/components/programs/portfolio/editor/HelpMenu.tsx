@@ -3,9 +3,12 @@
 import React from "react";
 import PopUp from "./PopUp";
 
-const HelpMenu = () => {
-  const [displayHelp, setDisplayHelp] = React.useState(false);
+interface HelpMenuProps {
+  displayHelp: boolean;
+  setDisplayHelp: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
+const HelpMenu = ({ displayHelp, setDisplayHelp }: HelpMenuProps) => {
   if (!displayHelp) {
     return null;
   }
@@ -21,17 +24,23 @@ const HelpMenu = () => {
             <div className="flex flex-col">
               <span>n</span>
               <span>n</span>
+              <span>n</span>
+              <span>n</span>
             </div>
           </div>
           <div className="col-span-3 text-left border-r border-r-comment pl-2">
             <div className="flex flex-col">
               <span>:help</span>
-              <span>:qa</span>
+              <span>:!ls</span>
+              <span>:tabnew</span>
+              <span>:q</span>
             </div>
           </div>
           <div className="col-span-8 text-left pl-2">
             <div className="flex flex-col">
               <span>Toggle help menu</span>
+              <span>List directory</span>
+              <span>Open tab</span>
               <span>Quit</span>
             </div>
           </div>

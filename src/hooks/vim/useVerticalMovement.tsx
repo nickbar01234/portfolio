@@ -11,7 +11,7 @@ interface UseVerticalMovementProps {
 const useVerticalMovement = (props: UseVerticalMovementProps) => {
   const { ids, activeId, setActiveId, shouldListen } = props;
 
-  const onKeyPress = React.useCallback(
+  const onKeydown = React.useCallback(
     (e: KeyboardEvent) => {
       if (!shouldListen) {
         return;
@@ -34,8 +34,8 @@ const useVerticalMovement = (props: UseVerticalMovementProps) => {
   );
 
   React.useEffect(() => {
-    window.addEventListener("keypress", onKeyPress);
-    return () => window.removeEventListener("keypress", onKeyPress);
+    window.addEventListener("keydown", onKeydown);
+    return () => window.removeEventListener("keydown", onKeydown);
   });
 };
 

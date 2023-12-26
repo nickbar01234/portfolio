@@ -41,3 +41,24 @@ export const isTrueKeyPress = (key: string) => {
   return (event: KeyboardEvent) =>
     event.key === key && !event.shiftKey && !event.ctrlKey;
 };
+
+export enum Command {
+  TAB_NEW,
+  HELP,
+  QUIT,
+  LS,
+}
+
+export const whichCommand = (command: string) => {
+  if (/:tabnew \w+/.test(command)) {
+    return Command.TAB_NEW;
+  } else if (command === ":help") {
+    return Command.HELP;
+  } else if (command === ":q") {
+    return Command.QUIT;
+  } else if (command === ":!ls") {
+    return Command.LS;
+  } else {
+    return Command.TAB_NEW;
+  }
+};

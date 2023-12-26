@@ -1,34 +1,44 @@
 "use client";
 
-import { About, Tutorial } from "@/components/programs/portfolio/files";
-import { HelpMenu, Footer } from "./editor";
+import { HelpMenu, Footer, PopUp } from "./editor";
 import React from "react";
 import { SideBar, TabBar } from "./navigation";
 import { useClosePortfolio } from "@/hooks";
+import { useCommandListener } from "@/hooks/vim";
+import { Component } from "@/type";
+import Directory from "./navigation/Directory";
+import { PortfolioContext } from "..";
 
-const FILES = [Tutorial, About];
+const App = () => {
+  const {
+    files,
+    tabs,
+    setTabs,
+    activeTabId,
+    setActiveTabId,
+    popups: { directory, help },
+  } = React.useContext(PortfolioContext);
+  const { setDisplay: setDisplayDirectory } = directory;
+  const { display: displayHelp, setDisplay: setDisplayHelp } = help;
 
-const Portfolio = () => {
-  const [tabs, setTabs] = React.useState([Tutorial]);
-  const [activeTabId, setActiveTabId] = React.useState(Tutorial.id);
+  const { command, listening: commandListenerActive } = useCommandListener({});
+
+  const onFileClick = (file: Component) => {
+    setTabs((prev) =>
+      prev.find((tab) => tab.id === file.id) ? prev : [...prev, file]
+    );
+    setActiveTabId(file.id);
+    setDisplayDirectory(false);
+  };
 
   useClosePortfolio({ tabs });
 
-  const activeTab = React.useMemo(() => {
-    const ActiveTab = tabs.find((tab) => tab.id === activeTabId);
-    // Add dummy element to maintain grid
-    return ActiveTab != null ? <ActiveTab active /> : <div></div>;
-  }, [activeTabId, tabs]);
-
   return (
     <div className="h-full w-full grid grid-cols-[4%_96%]">
-      <HelpMenu />
+      <HelpMenu displayHelp={displayHelp} setDisplayHelp={setDisplayHelp} />
+      <Directory onFileClick={onFileClick} />
       <div className="h-full w-full bg-bg-variant py-2 border-r-2 border-r-bg-highlight">
-        <SideBar
-          files={FILES}
-          setTabs={setTabs}
-          setActiveTabId={setActiveTabId}
-        />
+        <SideBar setTabs={setTabs} setActiveTabId={setActiveTabId} />
       </div>
       <div className="h-full w-full grid grid-rows-[5%_87%_8%] overflow-y-hidden overflow-x-auto scrollbar">
         <div className="pt-2 pl-2">
@@ -42,14 +52,22 @@ const Portfolio = () => {
         {tabs.length === 0 ? (
           <div></div>
         ) : (
-          FILES.map((File) => (
-            <File active={File.id === activeTabId} key={File.id} />
+          files.map((File) => (
+            <File
+              active={File.id === activeTabId}
+              key={File.id}
+              typingCommand={commandListenerActive}
+            />
           ))
         )}
-        <Footer author="nickbar01234" lastModified={new Date("2023-01-01")} />
+        <Footer
+          author="nickbar01234"
+          lastModified={new Date("2023-01-01")}
+          command={command}
+        />
       </div>
     </div>
   );
 };
 
-export default Portfolio;
+export default App;

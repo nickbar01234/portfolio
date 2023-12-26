@@ -5,6 +5,7 @@ import React from "react";
 interface EditorProviderProps {
   children?: React.ReactNode;
   active: boolean;
+  typingCommand: boolean;
 }
 
 interface EditorContext {
@@ -19,7 +20,7 @@ export const EditorContext = React.createContext<EditorContext>(
 );
 
 const EditorProvider = (props: EditorProviderProps) => {
-  const { active } = props;
+  const { active, typingCommand } = props;
   const [ids, setIds] = React.useState<string[]>([]);
   const [activeId, setActiveId] = React.useState<string>("");
 
@@ -33,7 +34,7 @@ const EditorProvider = (props: EditorProviderProps) => {
     ids,
     activeId,
     setActiveId,
-    shouldListen: active,
+    shouldListen: active && !typingCommand,
   });
 
   return (

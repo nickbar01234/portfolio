@@ -6,9 +6,9 @@ import { hash } from "@/utils";
 import React from "react";
 import EditorProvider, { NumberedLine, Syntax } from "../editor";
 
-const About: Component = ({ active }) => {
+const About: Component = ({ active, typingCommand }) => {
   return (
-    <EditorProvider active={active}>
+    <EditorProvider active={active} typingCommand={typingCommand}>
       <NumberedLine>
         <pre>
           <Syntax.Decl>const</Syntax.Decl> <Syntax.Id>name</Syntax.Id>{" "}
