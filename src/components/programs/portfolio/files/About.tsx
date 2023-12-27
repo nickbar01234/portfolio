@@ -51,7 +51,7 @@ const About: Component = ({ active, typingCommand }) => {
      {
       {  }
       }_{ __{
-  .-{   }   }-.
+   .-{   }   }-.
   (   }     {   )
   |\`-.._____..-'|
   |             ;--.
