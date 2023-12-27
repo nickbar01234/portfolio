@@ -10,13 +10,24 @@ type GetGithubFileMetadataRequest = TypedFetch<
 >;
 
 export const getGithubFileMetadata = async (
-  req: GetGithubFileMetadataRequest
+  req: GetGithubFileMetadataRequest,
+  mock: boolean = false
 ) => {
   const { body, ...rest } = req;
+
+  if (mock) {
+    return getGithubFileMetadataResponse.parse(
+      body.paths.map((path) => ({
+        path: path,
+        author: body.username,
+        modified: new Date(),
+      }))
+    );
+  }
+
   const url = `/api/github?username=${body.username}&repo=${
     body.repo
   }&paths=${body.paths.join(",")}`;
-  console.log(url);
   const res = await fetch(url, { method: "GET", ...rest });
   const json = await res.json();
   return getGithubFileMetadataResponse.parse(json);

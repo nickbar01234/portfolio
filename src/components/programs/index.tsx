@@ -41,13 +41,16 @@ const Portfolio = () => {
   const [displayHelp, setDisplayHelp] = React.useState(false);
 
   React.useEffect(() => {
-    getGithubFileMetadata({
-      body: {
-        username: "nickbar01234",
-        repo: "portfolio",
-        paths: ["src/components/programs/portfolio/files/About.tsx"],
+    getGithubFileMetadata(
+      {
+        body: {
+          username: "nickbar01234",
+          repo: "portfolio",
+          paths: ["src/components/programs/portfolio/files/About.tsx"],
+        },
       },
-    }).then((res) => console.log(res));
+      true
+    ).then((res) => console.log(res));
   });
 
   return (
