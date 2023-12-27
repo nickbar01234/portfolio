@@ -16,7 +16,7 @@ const NumberedLine = ({ children }: NumberedLineProps) => {
 
   React.useEffect(() => {
     if (id === activeId && ref.current) {
-      ref.current.scrollIntoView({ behavior: "instant" });
+      ref.current.scrollIntoView({ behavior: "smooth", block: "end" });
     }
   }, [activeId, id]);
 
