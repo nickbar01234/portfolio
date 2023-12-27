@@ -38,6 +38,7 @@ const ACTIONS = [
     description: "Up",
   },
 ];
+
 const HelpMenu = ({ displayHelp, setDisplayHelp }: HelpMenuProps) => {
   if (!displayHelp) {
     return null;
@@ -50,7 +51,7 @@ const HelpMenu = ({ displayHelp, setDisplayHelp }: HelpMenuProps) => {
           Key Maps
         </div>
         <div className="w-full h-full flex flex-col py-2 overflow-hidden">
-          <div className="h-full overflow-y-auto scrollbar">
+          <div className="h-full overflow-y-auto scrollbar px-4">
             {ACTIONS.map((action, idx) => (
               <div key={idx} className="flex justify-between hover:bg-comment">
                 <span>{action.description}</span>

@@ -44,7 +44,7 @@ const TabBar = (props: TabNavigationProps) => {
               key={tab.id}
               onClick={() => onTabSelect(tab.id)}
             >
-              <FontAwesomeIcon icon={faReact} color="#61dbfb" />
+              <tab.Icon />
               <span className="text-text">{tab.displayName}</span>
               <FontAwesomeIcon
                 icon={faX}

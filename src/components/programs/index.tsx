@@ -4,6 +4,7 @@ import { Component } from "@/type";
 import React from "react";
 import { About, Tutorial } from "./portfolio/files";
 import App from "./portfolio";
+import { getGithubFileMetadata } from "@/app/api";
 
 interface PortfolioContext {
   files: Component[];
@@ -38,6 +39,16 @@ const Portfolio = () => {
   const [activeTabId, setActiveTabId] = React.useState(Tutorial.id);
   const [displayDirectory, setDisplayDirectory] = React.useState(false);
   const [displayHelp, setDisplayHelp] = React.useState(false);
+
+  React.useEffect(() => {
+    getGithubFileMetadata({
+      body: {
+        username: "nickbar01234",
+        repo: "portfolio",
+        paths: ["src/components/programs/portfolio/files/About.tsx"],
+      },
+    }).then((res) => console.log(res));
+  });
 
   return (
     <PortfolioContext.Provider

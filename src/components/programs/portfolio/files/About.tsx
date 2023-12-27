@@ -5,6 +5,8 @@ import { Component } from "@/type";
 import { hash } from "@/utils";
 import React, { useState } from "react";
 import EditorProvider, { NumberedLine, Syntax } from "../editor";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faReact } from "@fortawesome/free-brands-svg-icons";
 
 const About: Component = ({ active, typingCommand }) => {
   const [procastinateFor, setProcastinateFor] = useState(0);
@@ -102,6 +104,10 @@ const About: Component = ({ active, typingCommand }) => {
 };
 
 About.displayName = "About";
+About.path = "src/components/programs/portfolio/files/About.tsx";
 About.id = hash(About.displayName);
+About.Icon = function Icon(props) {
+  return <FontAwesomeIcon icon={faReact} color="#61dbfb" {...props} />;
+};
 
 export default About;

@@ -1,6 +1,8 @@
 import { Component } from "@/type";
 import { hash } from "@/utils";
 import EditorProvider, { NumberedLine, Syntax } from "../editor";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faReact } from "@fortawesome/free-brands-svg-icons";
 
 const Tutorial: Component = ({ active, typingCommand }) => {
   return (
@@ -33,6 +35,10 @@ const Tutorial: Component = ({ active, typingCommand }) => {
 };
 
 Tutorial.displayName = "Tutorial";
+Tutorial.path = "src/components/programs/portfolio/files/Tutorial.tsx";
 Tutorial.id = hash(Tutorial.displayName);
+Tutorial.Icon = function Icon(props) {
+  return <FontAwesomeIcon icon={faReact} color="#61dbfb" {...props} />;
+};
 
 export default Tutorial;

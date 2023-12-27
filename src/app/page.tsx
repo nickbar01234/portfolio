@@ -8,8 +8,6 @@ import { faCog } from "@fortawesome/free-solid-svg-icons";
 import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import { openNewTab } from "@/utils";
 
-// ╰─➤  curl -s "https://api.github.com/repos/nickbar01234/config/commits?paths=lvim%2Fconfig.lua&per_page=1&page=1"                                                                                           130 ↵
-
 const Page = () => {
   const router = useRouter();
 
