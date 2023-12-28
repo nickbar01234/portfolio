@@ -46,7 +46,7 @@ const About: Component = ({ active, typingCommand }) => {
             <Syntax.Keyword>=</Syntax.Keyword>{" "}
             <Syntax.Keyword>await</Syntax.Keyword>{" "}
             <Syntax.Call>brewing</Syntax.Call>
-            <Syntax.Paren1 />
+            <Syntax.Paren1 open="(" close=")" />
           </Syntax.Statement>
           {`   
      {
@@ -73,7 +73,7 @@ const About: Component = ({ active, typingCommand }) => {
             <Syntax.Keyword>= ()</Syntax.Keyword>{" "}
             <Syntax.Keyword>=&gt;</Syntax.Keyword>{" "}
             <Syntax.Call>setTimeout</Syntax.Call>
-            <Syntax.Paren1>
+            <Syntax.Paren1 open="(" close=")">
               <Syntax.Text>procastinate</Syntax.Text>
               <Syntax.Comment>,</Syntax.Comment> <Syntax.Id>0</Syntax.Id>
             </Syntax.Paren1>
@@ -87,7 +87,7 @@ const About: Component = ({ active, typingCommand }) => {
             <Syntax.Keyword>= ()</Syntax.Keyword>{" "}
             <Syntax.Keyword>=&gt;</Syntax.Keyword>{" "}
             <Syntax.Call>setTimeout</Syntax.Call>
-            <Syntax.Paren1>
+            <Syntax.Paren1 open="(" close=")">
               <Syntax.Text>work</Syntax.Text>
               <Syntax.Comment>,</Syntax.Comment>{" "}
               <Syntax.Id className="animate-pulse">{procastinateFor}</Syntax.Id>
@@ -99,7 +99,7 @@ const About: Component = ({ active, typingCommand }) => {
         <pre>
           <Syntax.Statement>
             <Syntax.Call>work</Syntax.Call>
-            <Syntax.Paren1 />
+            <Syntax.Paren1 open="(" close=")" />
           </Syntax.Statement>
         </pre>
       </NumberedLine>

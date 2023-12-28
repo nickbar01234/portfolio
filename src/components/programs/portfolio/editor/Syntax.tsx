@@ -10,12 +10,16 @@ const withTextColor = (color: string) => {
 };
 
 const withParenthesis = (color: string) => {
-  return function Braces({ children }: Props) {
+  return function Braces({
+    children,
+    open,
+    close,
+  }: Props & { open: string; close: string }) {
     return (
       <>
-        <span className={color}>(</span>
+        <span className={color}>{open}</span>
         {children}
-        <span className={color}>)</span>
+        <span className={color}>{close}</span>
       </>
     );
   };
@@ -41,12 +45,16 @@ const Syntax = {
       </>
     );
   },
-  Statement: function Syntax({ children, className }: Props) {
+  Statement: function Syntax({
+    children,
+    className,
+    delim = ";",
+  }: Props & { delim?: string }) {
     const Comment = withTextColor("text-comment");
     return (
       <>
         {children}
-        <Comment>;</Comment>
+        <Comment>{delim}</Comment>
       </>
     );
   },
