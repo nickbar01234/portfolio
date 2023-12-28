@@ -1,8 +1,23 @@
 import { Component } from "@/type";
 import { hash } from "@/utils";
+import EditorProvider, { NumberedLine, Syntax } from "../editor";
 
-const Skills: Component = () => {
-  return null;
+const Skills: Component = ({ active, typingCommand }) => {
+  return (
+    <EditorProvider active={active} typingCommand={typingCommand}>
+      <NumberedLine>
+        <pre className="text-keyword">{"{"}</pre>
+      </NumberedLine>
+      <NumberedLine ident={0}>
+        <pre>
+          <Syntax.String>Language</Syntax.String>
+        </pre>
+      </NumberedLine>
+      <NumberedLine>
+        <pre className="text-keyword">{"}"}</pre>
+      </NumberedLine>
+    </EditorProvider>
+  );
 };
 
 Skills.displayName = "Skills";

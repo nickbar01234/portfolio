@@ -22,31 +22,32 @@ const About: Component = ({ active, typingCommand }) => {
     <EditorProvider active={active} typingCommand={typingCommand}>
       <NumberedLine>
         <pre>
-          <Syntax.Decl>const</Syntax.Decl> <Syntax.Id>name</Syntax.Id>{" "}
-          <Syntax.Keyword>=</Syntax.Keyword>{" "}
-          <Syntax.Comment>&quot;</Syntax.Comment>
-          <Syntax.String className="uppercase">Nick Doan</Syntax.String>
-          <Syntax.Comment>&quot;</Syntax.Comment>
-          <Syntax.Comment>;</Syntax.Comment>
+          <Syntax.Statement>
+            <Syntax.Decl>const</Syntax.Decl> <Syntax.Id>name</Syntax.Id>{" "}
+            <Syntax.Keyword>=</Syntax.Keyword>{" "}
+            <Syntax.String className="uppercase">Nick Doan</Syntax.String>
+          </Syntax.Statement>
         </pre>
       </NumberedLine>
       <NumberedLine>
         <pre>
-          <Syntax.Decl>let</Syntax.Decl> <Syntax.Id>age</Syntax.Id>{" "}
-          <Syntax.Keyword>=</Syntax.Keyword> <Syntax.Id>undefined</Syntax.Id>
-          <Syntax.Comment>;</Syntax.Comment>
+          <Syntax.Statement>
+            <Syntax.Decl>let</Syntax.Decl> <Syntax.Id>age</Syntax.Id>{" "}
+            <Syntax.Keyword>=</Syntax.Keyword> <Syntax.Id>undefined</Syntax.Id>
+          </Syntax.Statement>
         </pre>
       </NumberedLine>
       <NumberedLine />
       <NumberedLine />
       <NumberedLine>
         <pre>
-          <Syntax.Decl>let</Syntax.Decl> <Syntax.Id>coffee</Syntax.Id>{" "}
-          <Syntax.Keyword>=</Syntax.Keyword>{" "}
-          <Syntax.Keyword>await</Syntax.Keyword>{" "}
-          <Syntax.Call>brewing</Syntax.Call>
-          <Syntax.Paren1 />
-          <Syntax.Comment>;</Syntax.Comment>
+          <Syntax.Statement>
+            <Syntax.Decl>let</Syntax.Decl> <Syntax.Id>coffee</Syntax.Id>{" "}
+            <Syntax.Keyword>=</Syntax.Keyword>{" "}
+            <Syntax.Keyword>await</Syntax.Keyword>{" "}
+            <Syntax.Call>brewing</Syntax.Call>
+            <Syntax.Paren1 />
+          </Syntax.Statement>
           {`   
      {
       {  }
@@ -67,36 +68,39 @@ const About: Component = ({ active, typingCommand }) => {
       <NumberedLine />
       <NumberedLine>
         <pre>
-          <Syntax.Decl>var</Syntax.Decl> <Syntax.Id>work</Syntax.Id>{" "}
-          <Syntax.Keyword>= ()</Syntax.Keyword>{" "}
-          <Syntax.Keyword>=&gt;</Syntax.Keyword>{" "}
-          <Syntax.Call>setTimeout</Syntax.Call>
-          <Syntax.Paren1>
-            <Syntax.Text>procastinate</Syntax.Text>
-            <Syntax.Comment>,</Syntax.Comment> <Syntax.Id>0</Syntax.Id>
-          </Syntax.Paren1>
-          <Syntax.Comment>;</Syntax.Comment>
+          <Syntax.Statement>
+            <Syntax.Decl>var</Syntax.Decl> <Syntax.Id>work</Syntax.Id>{" "}
+            <Syntax.Keyword>= ()</Syntax.Keyword>{" "}
+            <Syntax.Keyword>=&gt;</Syntax.Keyword>{" "}
+            <Syntax.Call>setTimeout</Syntax.Call>
+            <Syntax.Paren1>
+              <Syntax.Text>procastinate</Syntax.Text>
+              <Syntax.Comment>,</Syntax.Comment> <Syntax.Id>0</Syntax.Id>
+            </Syntax.Paren1>
+          </Syntax.Statement>
         </pre>
       </NumberedLine>
       <NumberedLine>
         <pre>
-          <Syntax.Decl>var</Syntax.Decl> <Syntax.Id>procastinate</Syntax.Id>{" "}
-          <Syntax.Keyword>= ()</Syntax.Keyword>{" "}
-          <Syntax.Keyword>=&gt;</Syntax.Keyword>{" "}
-          <Syntax.Call>setTimeout</Syntax.Call>
-          <Syntax.Paren1>
-            <Syntax.Text>work</Syntax.Text>
-            <Syntax.Comment>,</Syntax.Comment>{" "}
-            <Syntax.Id className="animate-pulse">{procastinateFor}</Syntax.Id>
-          </Syntax.Paren1>
-          <Syntax.Comment>;</Syntax.Comment>
+          <Syntax.Statement>
+            <Syntax.Decl>var</Syntax.Decl> <Syntax.Id>procastinate</Syntax.Id>{" "}
+            <Syntax.Keyword>= ()</Syntax.Keyword>{" "}
+            <Syntax.Keyword>=&gt;</Syntax.Keyword>{" "}
+            <Syntax.Call>setTimeout</Syntax.Call>
+            <Syntax.Paren1>
+              <Syntax.Text>work</Syntax.Text>
+              <Syntax.Comment>,</Syntax.Comment>{" "}
+              <Syntax.Id className="animate-pulse">{procastinateFor}</Syntax.Id>
+            </Syntax.Paren1>
+          </Syntax.Statement>
         </pre>
       </NumberedLine>
       <NumberedLine>
         <pre>
-          <Syntax.Call>work</Syntax.Call>
-          <Syntax.Paren1 />
-          <Syntax.Comment>;</Syntax.Comment>
+          <Syntax.Statement>
+            <Syntax.Call>work</Syntax.Call>
+            <Syntax.Paren1 />
+          </Syntax.Statement>
         </pre>
       </NumberedLine>
     </EditorProvider>

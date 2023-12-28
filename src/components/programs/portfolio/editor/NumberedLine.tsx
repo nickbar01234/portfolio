@@ -3,12 +3,14 @@ import { EditorContext } from ".";
 
 interface NumberedLineProps {
   children?: React.ReactNode;
+  ident?: number;
 }
 
-const NumberedLine = ({ children }: NumberedLineProps) => {
+const NumberedLine = ({ ident, children }: NumberedLineProps) => {
   const ref = React.useRef<HTMLDivElement>(null);
   const { ids, setIds, activeId, setActiveId } = useContext(EditorContext);
   const id = React.useId();
+  const pxLeft = 2 * (ident ?? 0);
 
   React.useEffect(() => {
     setIds((prev) => [...prev, id]);
@@ -31,6 +33,7 @@ const NumberedLine = ({ children }: NumberedLineProps) => {
       <div className="w-4 text-right align-top">
         <span className="text-comment text-sm">{ids.indexOf(id)}</span>
       </div>
+      {ident != undefined && <pre>{" ".repeat(ident)}</pre>}
       {children}
     </div>
   );
