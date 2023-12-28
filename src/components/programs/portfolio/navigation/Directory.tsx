@@ -29,10 +29,12 @@ const Directory = (props: DirectoryProps) => {
           {files.map((file) => (
             <div
               key={file.id}
-              className="flex gap-x-1.5 items-center hover:bg-comment-variant hover:bg-opacity-30 cursor-pointer"
+              className="grid grid-cols-[5%_95%] gap-x-2 hover:bg-comment-variant cursor-pointer"
               onClick={() => onFileClick(file)}
             >
-              <FontAwesomeIcon icon={faReact} color="#61dbfb" />
+              <div className="flex justify-end items-center">
+                <file.Icon />
+              </div>
               <span>{file.displayName}</span>
             </div>
           ))}
