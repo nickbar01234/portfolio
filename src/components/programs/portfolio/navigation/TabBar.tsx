@@ -32,7 +32,7 @@ const TabBar = (props: TabNavigationProps) => {
   );
 
   return (
-    <div className="relative z-50 w-full bg-bg">
+    <div className="relative z-20 w-full bg-bg">
       <div className="flex gap-x-4">
         {tabs.map((tab) => {
           const isActive = tab.id === activeTabId;

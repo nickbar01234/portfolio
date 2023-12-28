@@ -24,14 +24,16 @@ const Footer = (props: FooterProps) => {
   }, [lastModified]);
 
   return (
-    <div className="flex items-center justify-between p-2 w-full bg-bg-variant drop-shadow-lg h-full text-sm">
-      {command.length === 0 ? (
-        <span className="uppercase">-- normal --</span>
-      ) : (
-        <span className="max-w-64 text-ellipsis overflow-hidden">
-          <pre className="border-r-2 border-r-comment">{command}</pre>
-        </span>
-      )}
+    <div className="flex items-center sm:justify-between justify-center p-2 w-full bg-bg-variant drop-shadow-lg h-full text-sm">
+      <div className="sm:block hidden">
+        {command.length === 0 ? (
+          <span className="uppercase">-- normal --</span>
+        ) : (
+          <span className="max-w-64 text-ellipsis overflow-hidden">
+            <pre className="border-r-2 border-r-comment">{command}</pre>
+          </span>
+        )}
+      </div>
       <span>
         Blame {author} ({timeSinceLastModified})
       </span>
