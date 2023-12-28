@@ -5,9 +5,16 @@ import React from "react";
 import { About, Tutorial, Skills } from "./portfolio/files";
 import App from "./portfolio";
 import { getGithubFileMetadata } from "@/app/api";
+import { REPO, USERNAME } from "./portfolio/constants";
+
+interface File {
+  File: Component;
+  author: string;
+  modified: Date;
+}
 
 interface PortfolioContext {
-  files: Component[];
+  files: File[];
 
   tabs: Component[];
   setTabs: React.Dispatch<React.SetStateAction<Component[]>>;
@@ -35,28 +42,56 @@ const PortfolioContext = React.createContext<PortfolioContext>(
 );
 
 const Portfolio = () => {
+  const [fetching, setFetching] = React.useState(true);
   const [tabs, setTabs] = React.useState([Tutorial]);
   const [activeTabId, setActiveTabId] = React.useState(Tutorial.id);
   const [displayDirectory, setDisplayDirectory] = React.useState(false);
   const [displayHelp, setDisplayHelp] = React.useState(false);
+  const [files, setFiles] = React.useState<File[]>([]);
 
   React.useEffect(() => {
+    const paths = FILES.map((file) => file.path);
     getGithubFileMetadata(
       {
-        body: {
-          username: "nickbar01234",
-          repo: "portfolio",
-          paths: ["src/components/programs/portfolio/files/About.tsx"],
-        },
+        body: { username: USERNAME, repo: REPO, paths: paths },
       },
       true
-    ).then((res) => console.log(res));
-  });
+    ).then((res) => {
+      const files: File[] = FILES.map((file) => {
+        const metadata = res.find((v) => v.path === file.path);
+        if (metadata === undefined) {
+          return {
+            File: file,
+            author: USERNAME,
+            modified: new Date(),
+          };
+        }
+        return {
+          File: file,
+          author: metadata.author,
+          modified: new Date(metadata.modified),
+        };
+      });
+      setFiles(files);
+      setFetching(false);
+    });
+  }, []);
+
+  if (fetching) {
+    return (
+      <div className="h-full w-full flex justify-center items-center">
+        <svg
+          className="animate-spin h-20 w-20 text-text border-8 border-comment rounded-full border-t-text"
+          viewBox="0 0 24 24"
+        />
+      </div>
+    );
+  }
 
   return (
     <PortfolioContext.Provider
       value={{
-        files: FILES,
+        files: files,
         tabs,
         setTabs,
         activeTabId,

@@ -10,6 +10,6 @@ export const getGithubFileMetadataResponse = z.array(
   z.object({
     path: z.string(),
     author: z.string(),
-    modified: z.date(),
+    modified: z.string(),
   })
 );

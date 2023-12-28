@@ -15,7 +15,7 @@ const githubApiSchema = z.array(
     commit: z.object({
       author: z.object({
         name: z.string(),
-        date: z.string().transform((input) => new Date(input)),
+        date: z.string(),
       }),
     }),
   })
@@ -53,7 +53,7 @@ export const GET = async (req: NextRequest) => {
     return NextResponse.json(
       {
         code: "UNKNOWN",
-        message: "Unknown error occured ",
+        message: "Unknown error occured",
       },
       { status: StatusCode.INTERNAL_SERVER_ERROR }
     );

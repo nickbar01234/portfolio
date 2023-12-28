@@ -10,7 +10,6 @@ const NumberedLine = ({ ident, children }: NumberedLineProps) => {
   const ref = React.useRef<HTMLDivElement>(null);
   const { ids, setIds, activeId, setActiveId } = useContext(EditorContext);
   const id = React.useId();
-  const pxLeft = 2 * (ident ?? 0);
 
   React.useEffect(() => {
     setIds((prev) => [...prev, id]);

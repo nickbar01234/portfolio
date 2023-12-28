@@ -19,8 +19,10 @@ const PopUp = (props: PopUpProps) => {
   return (
     <div
       className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 ${
-        expand ? "w-full h-full" : "md:w-3/6 md:h-4/6 w-5/6 h-3/6"
-      } bg-bg-variant shadow-lg shadow-comment rounded p-2 whitespace-nowrap z-50 border border-bg-highlight`}
+        expand
+          ? "w-full h-full"
+          : "md:w-3/6 md:h-4/6 w-5/6 h-3/6 rounded shadow-lg shadow-comment"
+      } bg-bg  p-2 whitespace-nowrap z-50 border border-bg-highlight`}
     >
       <div className="flex gap-x-2">
         <i

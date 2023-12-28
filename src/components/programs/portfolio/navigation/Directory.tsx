@@ -28,14 +28,14 @@ const Directory = (props: DirectoryProps) => {
         <div className="h-full w-full flex flex-col gap-y-2">
           {files.map((file) => (
             <div
-              key={file.id}
-              className="grid grid-cols-[5%_95%] gap-x-2 hover:bg-comment-variant cursor-pointer"
-              onClick={() => onFileClick(file)}
+              key={file.File.id}
+              className="grid lg:grid-cols-[5%_95%] grid-cols-[10%_90%] gap-x-2 hover:bg-comment-variant cursor-pointer"
+              onClick={() => onFileClick(file.File)}
             >
               <div className="flex justify-end items-center">
-                <file.Icon />
+                <file.File.Icon />
               </div>
-              <span>{file.displayName}</span>
+              <span>{file.File.displayName}</span>
             </div>
           ))}
         </div>

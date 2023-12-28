@@ -10,7 +10,6 @@ interface SideBarProps {
 }
 
 const SideBar = (props: SideBarProps) => {
-  const { setTabs, setActiveTabId } = props;
   const {
     popups: { directory },
   } = React.useContext(PortfolioContext);

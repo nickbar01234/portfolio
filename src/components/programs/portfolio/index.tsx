@@ -20,6 +20,9 @@ const App = () => {
   } = React.useContext(PortfolioContext);
   const { setDisplay: setDisplayDirectory } = directory;
   const { display: displayHelp, setDisplay: setDisplayHelp } = help;
+  const fileMetadata = React.useMemo(() => {
+    return files.find((file) => file.File.id === activeTabId);
+  }, [activeTabId, files]);
 
   const { command, listening: commandListenerActive } = useCommandListener({});
 
@@ -54,10 +57,10 @@ const App = () => {
             {tabs.length === 0 ? (
               <div></div>
             ) : (
-              files.map((File) => (
-                <File
-                  active={File.id === activeTabId}
-                  key={File.id}
+              files.map((file) => (
+                <file.File
+                  active={file.File.id === activeTabId}
+                  key={file.File.id}
                   typingCommand={commandListenerActive}
                 />
               ))
@@ -65,8 +68,8 @@ const App = () => {
           </div>
         </div>
         <Footer
-          author="nickbar01234"
-          lastModified={new Date("2023-01-01")}
+          author={fileMetadata?.author}
+          lastModified={fileMetadata?.modified}
           command={command}
         />
       </div>

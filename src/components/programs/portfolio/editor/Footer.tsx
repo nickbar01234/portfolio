@@ -3,14 +3,17 @@ import React from "react";
 
 interface FooterProps {
   command: string;
-  author: string;
-  lastModified: Date;
+  author?: string;
+  lastModified?: Date;
 }
 
 const Footer = (props: FooterProps) => {
   const { command, author, lastModified } = props;
 
   const timeSinceLastModified = React.useMemo(() => {
+    if (lastModified == undefined) {
+      return undefined;
+    }
     const { year, month, day, min } = timeBetween(lastModified);
     if (year > 0) {
       return `${year} years ago`;
@@ -34,9 +37,11 @@ const Footer = (props: FooterProps) => {
           </span>
         )}
       </div>
-      <span>
-        Blame {author} ({timeSinceLastModified})
-      </span>
+      {author != undefined && timeSinceLastModified != undefined && (
+        <span>
+          Blame {author} ({timeSinceLastModified})
+        </span>
+      )}
     </div>
   );
 };

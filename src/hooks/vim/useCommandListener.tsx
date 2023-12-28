@@ -22,14 +22,16 @@ const useCommandListener = (props: UseCommandListenerProps) => {
 
   const executeTabNew = React.useCallback(
     (filename: string) => {
-      const maybeFile = files.find((file) => file.displayName === filename);
+      const maybeFile = files.find(
+        (file) => file.File.displayName === filename
+      );
       if (maybeFile == undefined) {
         // TODO(nickbar01234) - Handle
       } else {
         if (tabs.find((tab) => tab.displayName === filename) == undefined) {
-          setTabs((prev) => [...prev, maybeFile]);
+          setTabs((prev) => [...prev, maybeFile.File]);
         }
-        setActiveTabId(maybeFile.id);
+        setActiveTabId(maybeFile.File.id);
       }
     },
     [files, tabs, setTabs, setActiveTabId]
