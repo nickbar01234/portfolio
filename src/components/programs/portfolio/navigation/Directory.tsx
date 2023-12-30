@@ -24,8 +24,8 @@ const Directory = (props: DirectoryProps) => {
 
   return (
     <PopUp setDisplayPopUp={setDisplayDirectory}>
-      <div className="pt-4 pb-2">
-        <div className="h-full w-full flex flex-col gap-y-2">
+      <div className="h-full w-full pt-4 pb-2">
+        <div className="h-full w-full flex flex-col gap-y-2 overflow-x-hidden overflow-y-auto scrollbar">
           {files.map((file) => (
             <div
               key={file.File.id}
