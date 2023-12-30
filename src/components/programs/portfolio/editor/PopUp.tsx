@@ -50,13 +50,13 @@ const PopUp = (props: PopUpProps) => {
           <div className={expandIconVisible ? "visible" : "invisible"}>
             {expand ? (
               <FontAwesomeIcon
-                icon={faUpRightAndDownLeftFromCenter}
+                icon={faDownLeftAndUpRightToCenter}
                 className="w-2 h-2 text-bg-highlight"
                 transform={{ flipY: true }}
               />
             ) : (
               <FontAwesomeIcon
-                icon={faDownLeftAndUpRightToCenter}
+                icon={faUpRightAndDownLeftFromCenter}
                 className="w-2 h-2 text-bg-highlight"
                 transform={{ flipY: true }}
               />
