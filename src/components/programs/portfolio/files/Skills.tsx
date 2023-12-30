@@ -95,8 +95,8 @@ const Skills: Component = ({ active, typingCommand }) => {
 Skills.displayName = "Skills";
 Skills.path = "src/components/programs/portfolio/files";
 Skills.id = hash(Skills.displayName);
-Skills.Icon = function Icon(className) {
-  return <i className={`text-active ${className}`}>{`{...}`}</i>;
+Skills.Icon = function Icon(style) {
+  return <i className={`text-active ${style}`}>{`{...}`}</i>;
 };
 
 export default Skills;

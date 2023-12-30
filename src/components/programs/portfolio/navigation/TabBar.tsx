@@ -43,7 +43,7 @@ const TabBar = (props: TabNavigationProps) => {
               key={tab.id}
               onClick={() => onTabSelect(tab.id)}
             >
-              <tab.Icon />
+              <tab.Icon className="" />
               <span className="text-text">{tab.displayName}</span>
               <FontAwesomeIcon
                 icon={faX}

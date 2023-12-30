@@ -37,8 +37,10 @@ const Tutorial: Component = ({ active, typingCommand }) => {
 Tutorial.displayName = "Tutorial";
 Tutorial.path = "src/components/programs/portfolio/files/Tutorial.tsx";
 Tutorial.id = hash(Tutorial.displayName);
-Tutorial.Icon = function Icon(props) {
-  return <FontAwesomeIcon icon={faReact} color="#61dbfb" {...props} />;
+Tutorial.Icon = function Icon({ className = "" }) {
+  return (
+    <FontAwesomeIcon icon={faReact} color="#61dbfb" className={className} />
+  );
 };
 
 export default Tutorial;

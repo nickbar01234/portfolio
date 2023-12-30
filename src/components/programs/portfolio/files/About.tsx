@@ -110,8 +110,10 @@ const About: Component = ({ active, typingCommand }) => {
 About.displayName = "About";
 About.path = "src/components/programs/portfolio/files/About.tsx";
 About.id = hash(About.displayName);
-About.Icon = function Icon(props) {
-  return <FontAwesomeIcon icon={faReact} color="#61dbfb" {...props} />;
+About.Icon = function Icon({ className = "" }) {
+  return (
+    <FontAwesomeIcon icon={faReact} color="#61dbfb" className={className} />
+  );
 };
 
 export default About;
