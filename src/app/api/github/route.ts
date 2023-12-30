@@ -5,6 +5,7 @@ import {
 } from "./route.schema";
 import { StatusCode } from "@/server";
 import { z } from "zod";
+import { env } from "@/env/index.mjs";
 
 /**
  * Describes only the relevant fields - the actual object may contain more
@@ -37,7 +38,13 @@ export const GET = async (req: NextRequest) => {
       body.data.paths.map(async (path) => {
         // TODO(nickbar01234) - Handle rate limit 403
         const res = await fetch(
-          `https://api.github.com/repos/${body.data.username}/${body.data.repo}/commits?path=${path}&per_page=1&page=1`
+          `https://api.github.com/repos/${body.data.username}/${body.data.repo}/commits?path=${path}&per_page=1&page=1`,
+          {
+            headers: {
+              Authorization: `Bearer ${env.GITHUB_TOKEN}`,
+              "X-Github-Api-Version": "2022-11-28",
+            },
+          }
         );
         const json = await res.json();
         const metadata = githubApiSchema.parse(json)[0];

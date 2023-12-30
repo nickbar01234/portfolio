@@ -55,7 +55,7 @@ const Portfolio = () => {
       {
         body: { username: USERNAME, repo: REPO, paths: paths },
       },
-      true
+      process.env.NODE_ENV === "development"
     ).then((res) => {
       const files: File[] = FILES.map((file) => {
         const metadata = res.find((v) => v.path === file.path);
