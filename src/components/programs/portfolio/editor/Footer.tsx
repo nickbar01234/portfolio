@@ -14,13 +14,15 @@ const Footer = (props: FooterProps) => {
     if (lastModified == undefined) {
       return undefined;
     }
-    const { year, month, day, min } = timeBetween(lastModified);
+    const { year, month, day, hour, min } = timeBetween(lastModified);
     if (year > 0) {
       return `${year} years ago`;
     } else if (month > 0) {
       return `${month} months ago`;
     } else if (day > 0) {
       return `${day} days ago`;
+    } else if (hour > 0) {
+      return `${hour} hours ago`;
     } else {
       return `${min} mins ago`;
     }

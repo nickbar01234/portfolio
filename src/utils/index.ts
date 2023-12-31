@@ -1,11 +1,13 @@
 import { createHash } from "crypto";
 
-type Time = Record<string, number>;
+type Time = Record<"year" | "month" | "day" | "hour" | "min", number>;
 
 export const timeBetween = (since: Date) => {
+  const order: (keyof Time)[] = ["year", "month", "day", "hour", "min"];
   const MS: Time = {
     year: 3.156e10,
     month: 2.628e9,
+    hour: 3.6e6,
     day: 8.64e7,
     min: 60000,
   };
@@ -15,12 +17,11 @@ export const timeBetween = (since: Date) => {
   const to = new Date();
   let delta = to.getTime() - since.getTime();
 
-  for (const [key, conversion] of Object.entries(MS)) {
-    if (key in unit) {
-      const time = Math.floor(delta / conversion);
-      delta -= conversion * time;
-      unit[key] = time;
-    }
+  for (const key of order) {
+    const conversion = MS[key];
+    const time = Math.floor(delta / MS[key]);
+    delta -= conversion * time;
+    unit[key] = time;
   }
 
   return unit;

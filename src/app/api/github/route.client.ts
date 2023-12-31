@@ -30,6 +30,5 @@ export const getGithubFileMetadata = async (
   }&paths=${body.paths.join(",")}`;
   const res = await fetch(url, { method: "GET", ...rest });
   const json = await res.json();
-  console.log(json);
   return getGithubFileMetadataResponse.parse(json);
 };
