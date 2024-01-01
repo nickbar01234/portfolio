@@ -13,10 +13,12 @@ const About: Component = ({ active, typingCommand }) => {
 
   React.useEffect(() => {
     const interval = setInterval(() => {
-      setProcastinateFor((prev) => prev + 1);
+      if (active) {
+        setProcastinateFor((prev) => prev + 1);
+      }
     }, 1000);
     return () => clearInterval(interval);
-  });
+  }, [active]);
 
   return (
     <EditorProvider active={active} typingCommand={typingCommand}>
