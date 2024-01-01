@@ -2,7 +2,13 @@
 
 import { Component } from "@/type";
 import React from "react";
-import { About, Tutorial, Skills, Experience } from "./portfolio/files";
+import {
+  About,
+  Tutorial,
+  Skills,
+  Experience,
+  Activity,
+} from "./portfolio/files";
 import App from "./portfolio";
 import { getGithubFileMetadata } from "@/app/api";
 import { REPO, USERNAME } from "./portfolio/constants";
@@ -35,7 +41,7 @@ interface PortfolioContext {
   };
 }
 
-const FILES = [Tutorial, About, Skills, Experience];
+const FILES = [Tutorial, About, Skills, Experience, Activity];
 
 const PortfolioContext = React.createContext<PortfolioContext>(
   {} as PortfolioContext
