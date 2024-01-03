@@ -1,11 +1,10 @@
 import { env } from "@/env/index.mjs";
-import { google } from "googleapis";
 import { NextResponse } from "next/server";
 import https from "https";
+import { driveV3 } from "@/server/sdk";
 
 export const GET = async () => {
-  const drive = google.drive({ version: "v3", auth: env.GOOGLE_API_KEY });
-  const res = await drive.files.list({
+  const res = await driveV3.files.list({
     q: `'${env.HEALTH_FOLDER}' in parents and trashed=false`,
     fields: "files(id,name)",
     orderBy: "createdTime desc",
@@ -14,7 +13,7 @@ export const GET = async () => {
   const files = res.data.files ?? [];
 
   if (files.length > 0) {
-    const fileRes = await drive.files.get({
+    const fileRes = await driveV3.files.get({
       fileId: files[0].id ?? undefined,
       alt: "media",
     });
