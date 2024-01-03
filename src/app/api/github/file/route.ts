@@ -8,22 +8,21 @@ import { octokit } from "@/server/sdk";
 
 export const GET = async (req: NextRequest) => {
   try {
-    const body = getGithubFileMetadataRequest.safeParse(
+    const queries = getGithubFileMetadataRequest.safeParse(
       Object.fromEntries(req.nextUrl.searchParams.entries())
     );
-    if (!body.success) {
+    if (!queries.success) {
       return NextResponse.json(
-        { code: "INVALID", message: "Invalid body" },
+        { code: "INVALID", message: "Invalid queries" },
         { status: StatusCode.BAD_REQUEST }
       );
     }
 
     const allMetadata = await Promise.all(
-      body.data.paths.map(async (path) => {
-        console.log(path);
+      queries.data.paths.map(async (path) => {
         const metadata = await octokit.rest.repos.listCommits({
-          owner: body.data.username,
-          repo: body.data.repo,
+          owner: queries.data.username,
+          repo: queries.data.repo,
           ref: "main",
           per_page: 1,
           page: 1,
@@ -34,7 +33,7 @@ export const GET = async (req: NextRequest) => {
         // TODO(nickbar01234) - Handle empty array
         return {
           path: path,
-          author: metadata.data[0].commit.author?.name ?? body.data.username,
+          author: metadata.data[0].commit.author?.name ?? queries.data.username,
           modified:
             metadata.data[0].commit.author?.date ?? new Date().toISOString(),
         };
