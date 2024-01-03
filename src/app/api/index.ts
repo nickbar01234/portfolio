@@ -1,1 +1,1 @@
-export * from "./github/route.client";
+export * from "./github/file/route.client";

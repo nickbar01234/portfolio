@@ -4,23 +4,7 @@ import {
   getGithubFileMetadataResponse,
 } from "./route.schema";
 import { StatusCode } from "@/server";
-import { z } from "zod";
-import { env } from "@/env/index.mjs";
-
-/**
- * Describes only the relevant fields - the actual object may contain more
- * fields.
- */
-const githubApiSchema = z.array(
-  z.object({
-    commit: z.object({
-      author: z.object({
-        name: z.string(),
-        date: z.string(),
-      }),
-    }),
-  })
-);
+import { octokit } from "@/server/sdk";
 
 export const GET = async (req: NextRequest) => {
   try {
@@ -36,22 +20,23 @@ export const GET = async (req: NextRequest) => {
 
     const allMetadata = await Promise.all(
       body.data.paths.map(async (path) => {
+        console.log(path);
+        const metadata = await octokit.rest.repos.listCommits({
+          owner: body.data.username,
+          repo: body.data.repo,
+          ref: "main",
+          per_page: 1,
+          page: 1,
+          path: path,
+        });
+
         // TODO(nickbar01234) - Handle rate limit 403
-        const res = await fetch(
-          `https://api.github.com/repos/${body.data.username}/${body.data.repo}/commits?path=${path}&per_page=1&page=1`,
-          {
-            headers: {
-              Authorization: `Bearer ${env.GITHUB_TOKEN}`,
-              "X-Github-Api-Version": "2022-11-28",
-            },
-          }
-        );
-        const json = await res.json();
-        const metadata = githubApiSchema.parse(json)[0];
+        // TODO(nickbar01234) - Handle empty array
         return {
           path: path,
-          author: metadata.commit.author.name,
-          modified: metadata.commit.author.date,
+          author: metadata.data[0].commit.author?.name ?? body.data.username,
+          modified:
+            metadata.data[0].commit.author?.date ?? new Date().toISOString(),
         };
       })
     );

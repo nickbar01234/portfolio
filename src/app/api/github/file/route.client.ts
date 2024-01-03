@@ -25,7 +25,7 @@ export const getGithubFileMetadata = async (
     );
   }
 
-  const url = `/api/github?username=${body.username}&repo=${
+  const url = `/api/github/file?username=${body.username}&repo=${
     body.repo
   }&paths=${body.paths.join(",")}`;
   const res = await fetch(url, { method: "GET", ...rest });
