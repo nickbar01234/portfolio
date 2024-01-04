@@ -1,7 +1,7 @@
 "use client";
 import { useVerticalMovement } from "@/hooks/vim";
 import React from "react";
-import { NumberedLine } from ".";
+import { Hideable, NumberedLine } from ".";
 
 interface EditorProviderProps {
   children?: React.ReactNode;
@@ -39,25 +39,23 @@ const EditorProvider = (props: EditorProviderProps) => {
   });
 
   return (
-    <EditorContext.Provider
-      value={{
-        ids: ids,
-        setIds: setIds,
-        activeId: activeId,
-        setActiveId: setActiveId,
-      }}
-    >
-      <div
-        className={`relative z-0 flex flex-col h-full pl-2 ${
-          active ? "block" : "hidden"
-        }`}
+    <Hideable active={active}>
+      <EditorContext.Provider
+        value={{
+          ids: ids,
+          setIds: setIds,
+          activeId: activeId,
+          setActiveId: setActiveId,
+        }}
       >
-        <div className="h-full overflow-y-auto scrollbar">
-          {props.children}
-          <NumberedLine />
+        <div className="relative z-0 flex flex-col h-full pl-2">
+          <div className="h-full overflow-y-auto scrollbar">
+            {props.children}
+            <NumberedLine />
+          </div>
         </div>
-      </div>
-    </EditorContext.Provider>
+      </EditorContext.Provider>
+    </Hideable>
   );
 };
 

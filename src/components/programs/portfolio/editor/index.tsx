@@ -1,5 +1,6 @@
 import EditorProvider, { EditorContext } from "./EditorProvider";
 
+export { default as Hideable } from "./Hideable";
 export { default as PopUp } from "./PopUp";
 export { default as NumberedLine } from "./NumberedLine";
 export { default as HelpMenu } from "./HelpMenu";

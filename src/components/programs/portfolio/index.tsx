@@ -25,6 +25,7 @@ const App = () => {
   }, [activeTabId, files]);
 
   const { command, listening: commandListenerActive } = useCommandListener({});
+  useClosePortfolio({ tabs });
 
   const onFileClick = (file: Component) => {
     setTabs((prev) =>
@@ -33,8 +34,6 @@ const App = () => {
     setActiveTabId(file.id);
     setDisplayDirectory(false);
   };
-
-  useClosePortfolio({ tabs });
 
   return (
     <div className="h-full w-full grid sm:grid-cols-[5%_95%] sm:grid-rows-1 grid-rows-[5%_95%]">
@@ -53,7 +52,7 @@ const App = () => {
           />
         </div>
         <div className="h-full w-full overflow-x-auto scrollbar">
-          <div className="min-w-max">
+          <div className="h-full min-w-max">
             {tabs.length === 0 ? (
               <div></div>
             ) : (

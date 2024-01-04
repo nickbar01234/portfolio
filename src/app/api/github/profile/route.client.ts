@@ -11,7 +11,7 @@ export const getGithubProfile = async (
 ): Promise<UserQuery> => {
   const { body, ...rest } = req;
 
-  const url = `/api/github/profile?username=${body.username}&from=${body.year}`;
+  const url = `/api/github/profile?username=${body.username}&year=${body.year}`;
   const res = await fetch(url, { method: "GET", ...rest });
   const json = await res.json();
   return json;

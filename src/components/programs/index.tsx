@@ -2,16 +2,11 @@
 
 import { Component } from "@/type";
 import React from "react";
-import {
-  About,
-  Tutorial,
-  Skills,
-  Experience,
-  Activity,
-} from "./portfolio/files";
+import { About, Skills, Experience, Activity } from "./portfolio/files";
 import App from "./portfolio";
 import { getGithubFileMetadata } from "@/app/api";
 import { REPO, USERNAME } from "./portfolio/constants";
+import { Loader } from "../layout";
 
 interface File {
   File: Component;
@@ -41,7 +36,7 @@ interface PortfolioContext {
   };
 }
 
-const FILES = [Tutorial, About, Skills, Experience, Activity];
+const FILES = [Activity, About, Skills, Experience];
 
 const PortfolioContext = React.createContext<PortfolioContext>(
   {} as PortfolioContext
@@ -49,8 +44,8 @@ const PortfolioContext = React.createContext<PortfolioContext>(
 
 const Portfolio = () => {
   const [fetching, setFetching] = React.useState(true);
-  const [tabs, setTabs] = React.useState([Tutorial]);
-  const [activeTabId, setActiveTabId] = React.useState(Tutorial.id);
+  const [tabs, setTabs] = React.useState([Activity]);
+  const [activeTabId, setActiveTabId] = React.useState(Activity.id);
   const [displayDirectory, setDisplayDirectory] = React.useState(false);
   const [displayHelp, setDisplayHelp] = React.useState(false);
   const [files, setFiles] = React.useState<File[]>([]);
@@ -83,39 +78,30 @@ const Portfolio = () => {
     });
   }, []);
 
-  if (fetching) {
-    return (
-      <div className="h-full w-full flex justify-center items-center">
-        <svg
-          className="animate-spin h-20 w-20 text-text border-8 border-comment rounded-full border-t-text"
-          viewBox="0 0 24 24"
-        />
-      </div>
-    );
-  }
-
   return (
-    <PortfolioContext.Provider
-      value={{
-        files: files,
-        tabs,
-        setTabs,
-        activeTabId,
-        setActiveTabId,
-        popups: {
-          directory: {
-            display: displayDirectory,
-            setDisplay: setDisplayDirectory,
+    <Loader loading={fetching}>
+      <PortfolioContext.Provider
+        value={{
+          files: files,
+          tabs,
+          setTabs,
+          activeTabId,
+          setActiveTabId,
+          popups: {
+            directory: {
+              display: displayDirectory,
+              setDisplay: setDisplayDirectory,
+            },
+            help: {
+              display: displayHelp,
+              setDisplay: setDisplayHelp,
+            },
           },
-          help: {
-            display: displayHelp,
-            setDisplay: setDisplayHelp,
-          },
-        },
-      }}
-    >
-      <App />
-    </PortfolioContext.Provider>
+        }}
+      >
+        <App />
+      </PortfolioContext.Provider>
+    </Loader>
   );
 };
 
