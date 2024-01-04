@@ -6,16 +6,24 @@ export const getGithubProfileRequest = z.object({
   year: z.string().regex(/^\d+$/),
 });
 
+type ContributionDay =
+  User["contributionsCollection"]["contributionCalendar"]["weeks"][number]["contributionDays"][number];
+
+// TODO(nickbar01234) - Hassle to get right
 export type UserQuery = {
   user: {
-    repositories: User["repositories"]["totalCount"];
-    issues: User["issues"]["totalCount"];
-    pullRequests: User["issues"]["totalCount"];
+    repositories: Pick<User["repositories"], "totalCount">;
+    issues: Pick<User["issues"], "totalCount">;
+    pullRequests: Pick<User["pullRequests"], "totalCount">;
     contributionsCollection: {
-      contributionCalendar: Pick<
-        User["contributionsCollection"]["contributionCalendar"],
-        "colors" | "weeks"
-      >;
+      contributionCalendar: {
+        colors: User["contributionsCollection"]["contributionCalendar"]["colors"];
+        totalContributions: User["contributionsCollection"]["contributionCalendar"]["totalContributions"];
+        weeks: Array<{
+          contributionDays: Array<Omit<ContributionDay, "contributionLevel">>;
+          firstDay: string;
+        }>;
+      };
     };
   };
 };
