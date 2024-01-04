@@ -19,13 +19,13 @@ const Activity: Component = ({ active, typingCommand }) => {
     return date.getFullYear().toString();
   }, []);
 
-  React.useState(() => {
+  React.useEffect(() => {
     getGithubProfile({ body: { username: USERNAME, year: year } }).then(
       (res) => {
         setGithubProfile(res);
       }
     );
-  });
+  }, [year]);
 
   return (
     <Loader loading={githubProfile === null && active}>
