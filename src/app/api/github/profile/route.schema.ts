@@ -16,6 +16,7 @@ type ContributionDay =
 // TODO(nickbar01234) - Hassle to get right
 export type UserQuery = {
   user: {
+    avatarUrl: User["avatarUrl"];
     repositories: Pick<User["repositories"], "totalCount">;
     issues: Pick<User["issues"], "totalCount">;
     pullRequests: Pick<User["pullRequests"], "totalCount">;

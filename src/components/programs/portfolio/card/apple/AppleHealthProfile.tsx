@@ -18,7 +18,7 @@ const AppleHealthProfile = () => {
   return (
     <Loader loading={appleHealth === null}>
       <div className="h-full w-full bg-bg-highlight rounded p-6">
-        <div className="h-full w-full overflow-x-auto scrollbar flex flex-col gap-y-3">
+        <div className="h-full w-full overflow-x-auto scrollbar flex flex-col justify-evenly">
           <HealthStatistic
             header="Calories"
             color="text-keyword"

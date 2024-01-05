@@ -4,11 +4,14 @@ import { Loader } from "@/components/layout";
 import GithubCard from "./GithubCard";
 import { USERNAME } from "../../constants";
 import GithubCalendar from "./GithubCalendar";
+import Image from "next/image";
 
 const GithubProfile = () => {
   const [githubProfile, setGithubProfile] =
     React.useState<GithubProfile | null>({
       user: {
+        avatarUrl:
+          "https://avatars.githubusercontent.com/u/74647679?u=40ef9f02f6012227521bf2267d111385b2e8f8a2&v=4",
         repositories: {
           totalCount: 14,
         },
@@ -2504,6 +2507,16 @@ const GithubProfile = () => {
   return (
     <Loader loading={githubProfile === null}>
       <div className="flex flex-col gap-y-2 bg-bg-highlight p-2.5 rounded h-full w-full justify-between">
+        <div className="flex gap-x-4 items-center">
+          <Image
+            src={githubProfile?.user.avatarUrl ?? ""}
+            alt="Github profile"
+            className="rounded-full"
+            width={128}
+            height={128}
+          />
+          <h1 className="text-3xl font-semibold">{USERNAME}</h1>
+        </div>
         <div className="grid grid-cols-12 gap-x-2 gap-y-2">
           <div className="lg:col-span-3 col-span-6">
             <GithubCard
