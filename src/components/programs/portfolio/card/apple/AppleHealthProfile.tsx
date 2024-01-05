@@ -18,35 +18,37 @@ const AppleHealthProfile = () => {
   return (
     <Loader loading={appleHealth === null}>
       <div className="h-full w-full bg-bg-highlight rounded p-6">
-        <div className="h-full w-full overflow-x-auto scrollbar flex flex-col justify-evenly">
-          <HealthStatistic
-            header="Calories"
-            color="text-keyword"
-            progress={appleHealth?.calories ?? 0}
-            goal={600}
-            unit="cal"
-          />
-          <HealthStatistic
-            header="Workout"
-            color="text-call"
-            progress={appleHealth?.workoutTime ?? 0}
-            goal={30}
-            unit="min"
-          />
-          <HealthStatistic
-            header="Stand"
-            color="text-decl"
-            progress={appleHealth?.standHours ?? 0}
-            goal={12}
-            unit="hour"
-          />
-          <HealthStatistic
-            header="Step"
-            color="text-active"
-            progress={appleHealth?.stepCount ?? 0}
-            goal={12_000}
-            unit="step"
-          />
+        <div className="h-full w-full flex flex-col justify-between gap-y-4 overflow-x-auto scrollbar">
+          <div className="h-full w-full flex flex-col justify-evenly gap-y-2">
+            <HealthStatistic
+              header="Calories"
+              color="text-keyword"
+              progress={appleHealth?.calories ?? 0}
+              goal={600}
+              unit="cal"
+            />
+            <HealthStatistic
+              header="Workout"
+              color="text-call"
+              progress={appleHealth?.workoutTime ?? 0}
+              goal={30}
+              unit="min"
+            />
+            <HealthStatistic
+              header="Stand"
+              color="text-decl"
+              progress={appleHealth?.standHours ?? 0}
+              goal={12}
+              unit="hour"
+            />
+            <HealthStatistic
+              header="Step"
+              color="text-active"
+              progress={appleHealth?.stepCount ?? 0}
+              goal={12_000}
+              unit="step"
+            />
+          </div>
           <div className="italic text-sm whitespace-nowrap">
             Last synced{" "}
             {moment(appleHealth?.lastModified).format("HH:MMa YYYY-MM-DD")}

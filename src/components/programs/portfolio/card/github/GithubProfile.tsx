@@ -2511,9 +2511,10 @@ const GithubProfile = () => {
           <Image
             src={githubProfile?.user.avatarUrl ?? ""}
             alt="Github profile"
-            className="rounded-full"
-            width={128}
-            height={128}
+            className="md:w-32 md:h-32 w-20 h-20 rounded-full"
+            width={0}
+            height={0}
+            sizes="100vw"
           />
           <h1 className="text-3xl font-semibold">{USERNAME}</h1>
         </div>

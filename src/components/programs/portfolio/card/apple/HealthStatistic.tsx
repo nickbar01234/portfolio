@@ -10,7 +10,7 @@ interface HealthStatisticProps {
 
 const HealthStatistic = (props: HealthStatisticProps) => {
   return (
-    <div className="flex flex-col gap-y-2.5">
+    <div className="flex flex-col gap-y-1.5">
       <span>{props.header}</span>
       <span className="text-3xl font-bold">
         <span className={props.color}>{props.progress}</span>
