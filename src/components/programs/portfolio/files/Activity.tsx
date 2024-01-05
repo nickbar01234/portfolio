@@ -20,11 +20,11 @@ const Activity: Component = ({ active, typingCommand }) => {
   }, []);
 
   React.useEffect(() => {
-    getGithubProfile({ body: { username: USERNAME, year: year } }).then(
-      (res) => {
-        setGithubProfile(res);
-      }
-    );
+    getGithubProfile({
+      body: { username: USERNAME, year: year, mock: true },
+    }).then((res) => {
+      setGithubProfile(res);
+    });
   }, [year]);
 
   return (

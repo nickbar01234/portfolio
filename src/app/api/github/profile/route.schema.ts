@@ -4,6 +4,10 @@ import { z } from "zod";
 export const getGithubProfileRequest = z.object({
   username: z.string(),
   year: z.string().regex(/^\d+$/),
+  mock: z
+    .string()
+    .optional()
+    .transform((value) => value === "true"),
 });
 
 type ContributionDay =

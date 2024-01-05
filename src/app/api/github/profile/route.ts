@@ -2,6 +2,7 @@ import { octokit } from "@/server/sdk";
 import { NextRequest, NextResponse } from "next/server";
 import { getGithubProfileRequest } from "./route.schema";
 import { StatusCode } from "@/server";
+import { promises as fs } from "fs";
 
 export const GET = async (req: NextRequest) => {
   const queries = getGithubProfileRequest.safeParse(
@@ -13,10 +14,15 @@ export const GET = async (req: NextRequest) => {
       { code: "INVALID", message: "Invalid queries", data: queries.error },
       { status: StatusCode.BAD_REQUEST }
     );
-  }
-
-  const res = await octokit.graphql(
-    `query($username: String!, $from: DateTime) {
+  } else if (queries.data.mock) {
+    const file = await fs.readFile(
+      process.cwd() + "/__mock__/getGithubProfile.json",
+      "utf8"
+    );
+    return NextResponse.json(JSON.parse(file));
+  } else {
+    const res = await octokit.graphql(
+      `query($username: String!, $from: DateTime) {
         user(login: $username) {
           repositories(isFork: false, isArchived: false, privacy: PUBLIC, isLocked: false) {
             totalCount
@@ -45,12 +51,12 @@ export const GET = async (req: NextRequest) => {
         }
       }
     `,
-    {
-      username: queries.data.username,
-      from: new Date(`${queries.data.year}-01-01`).toISOString(),
-      to: new Date(`${queries.data.year}-12-31`).toISOString(),
-    }
-  );
-
-  return NextResponse.json(res);
+      {
+        username: queries.data.username,
+        from: new Date(`${queries.data.year}-01-01`).toISOString(),
+        to: new Date(`${queries.data.year}-12-31`).toISOString(),
+      }
+    );
+    return NextResponse.json(res);
+  }
 };
