@@ -4,7 +4,7 @@ import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import EditorProvider, { NumberedLine } from "../editor";
 import React from "react";
-import { GithubProfile } from "../card";
+import { AppleHealthProfile, GithubProfile } from "../card";
 
 const Activity: Component = ({ active, typingCommand }) => {
   return (
@@ -18,11 +18,13 @@ const Activity: Component = ({ active, typingCommand }) => {
       </NumberedLine>
       <NumberedLine></NumberedLine>
       <NumberedLine>
-        <div className="w-full grid grid-cols-12 gap-x-4 overflow-hidden">
-          <div className="md:col-span-8 col-span-12 bg-bg-highlight p-2.5 rounded border-bg-highlight w-full">
+        <div className="w-full grid grid-cols-12 gap-4 overflow-hidden">
+          <div className="lg:col-span-8 col-span-12">
             <GithubProfile />
           </div>
-          <div className="md:col-span-4 col-span-12">hi</div>
+          <div className="lg:col-span-4 col-span-12">
+            <AppleHealthProfile />
+          </div>
         </div>
       </NumberedLine>
     </EditorProvider>

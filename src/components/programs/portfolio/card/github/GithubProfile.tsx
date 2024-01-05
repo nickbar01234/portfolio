@@ -2503,7 +2503,7 @@ const GithubProfile = () => {
 
   return (
     <Loader loading={githubProfile === null}>
-      <div className="flex flex-col gap-y-2">
+      <div className="flex flex-col gap-y-2 bg-bg-highlight p-2.5 rounded h-full w-full justify-between">
         <div className="grid grid-cols-12 gap-x-2 gap-y-2">
           <div className="lg:col-span-3 col-span-6">
             <GithubCard

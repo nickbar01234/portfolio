@@ -105,3 +105,7 @@ export const levelToColor = (isHalloween: boolean, color: string) => {
     }
   }
 };
+
+export const numberWithCommas = (number: number) => {
+  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+};
