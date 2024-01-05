@@ -48,7 +48,7 @@ const EditorProvider = (props: EditorProviderProps) => {
           setActiveId: setActiveId,
         }}
       >
-        <div className="relative z-0 flex flex-col h-full pl-2">
+        <div className="relative z-0 flex flex-col h-full px-2">
           <div className="h-full overflow-y-auto scrollbar">
             {props.children}
             <NumberedLine />

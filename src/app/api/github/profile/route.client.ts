@@ -6,6 +6,8 @@ type GetGithubProfileRequest = TypedFetch<
   z.infer<typeof getGithubProfileRequest>
 >;
 
+export type GithubProfile = Awaited<ReturnType<typeof getGithubProfile>>;
+
 export const getGithubProfile = async (
   req: GetGithubProfileRequest
 ): Promise<UserQuery> => {

@@ -22,7 +22,7 @@ export const GET = async (req: NextRequest) => {
     return NextResponse.json(JSON.parse(file));
   } else {
     const res = await octokit.graphql(
-      `query($username: String!, $from: DateTime) {
+      `query($username: String!, $from: DateTime, $to: DateTime) {
         user(login: $username) {
           repositories(isFork: false, isArchived: false, privacy: PUBLIC, isLocked: false) {
             totalCount
@@ -33,9 +33,9 @@ export const GET = async (req: NextRequest) => {
           pullRequests(states: OPEN) {
             totalCount
           }
-          contributionsCollection(from: $from) {
+          contributionsCollection(from: $from, to: $to) {
             contributionCalendar {
-              colors
+              isHalloween
               totalContributions
               weeks {
                 contributionDays {

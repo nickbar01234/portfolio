@@ -51,20 +51,20 @@ const App = () => {
             setActiveTabId={setActiveTabId}
           />
         </div>
-        <div className="h-full w-full overflow-x-auto scrollbar">
-          <div className="h-full min-w-max">
-            {tabs.length === 0 ? (
-              <div></div>
-            ) : (
-              files.map((file) => (
-                <file.File
-                  active={file.File.id === activeTabId}
-                  key={file.File.id}
-                  typingCommand={commandListenerActive}
-                />
-              ))
-            )}
-          </div>
+        {/* <div className="h-full w-full overflow-x-auto scrollbar"> */}
+        <div className="h-full w-full overflow-y-auto scrollbar">
+          {tabs.length === 0 ? (
+            <div></div>
+          ) : (
+            files.map((file) => (
+              <file.File
+                active={file.File.id === activeTabId}
+                key={file.File.id}
+                typingCommand={commandListenerActive}
+              />
+            ))
+          )}
+          {/* </div> */}
         </div>
         <Footer
           author={fileMetadata?.author}

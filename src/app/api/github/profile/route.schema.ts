@@ -21,7 +21,7 @@ export type UserQuery = {
     pullRequests: Pick<User["pullRequests"], "totalCount">;
     contributionsCollection: {
       contributionCalendar: {
-        colors: User["contributionsCollection"]["contributionCalendar"]["colors"];
+        isHalloween: User["contributionsCollection"]["contributionCalendar"]["isHalloween"];
         totalContributions: User["contributionsCollection"]["contributionCalendar"]["totalContributions"];
         weeks: Array<{
           contributionDays: Array<Omit<ContributionDay, "contributionLevel">>;
