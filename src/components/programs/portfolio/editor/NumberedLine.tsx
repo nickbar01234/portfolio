@@ -29,7 +29,7 @@ const NumberedLine = ({ ident, children }: NumberedLineProps) => {
       onClick={() => setActiveId(id)}
       ref={ref}
     >
-      <div className="w-4 text-right align-top">
+      <div className="min-w-4 text-right align-top">
         <span className="text-comment text-sm">{ids.indexOf(id)}</span>
       </div>
       {ident != undefined && <pre>{" ".repeat(ident)}</pre>}
