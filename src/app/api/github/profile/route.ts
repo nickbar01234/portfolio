@@ -36,16 +36,14 @@ export const GET = async (req: NextRequest) => {
           }
           contributionsCollection(from: $from, to: $to) {
             contributionCalendar {
-              isHalloween
               totalContributions
               weeks {
                 contributionDays {
-                  color
                   contributionCount
                   date
                   weekday
+                  contributionLevel
                 }
-                firstDay
               }
             }
           }

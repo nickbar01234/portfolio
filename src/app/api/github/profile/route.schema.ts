@@ -10,9 +10,10 @@ export const getGithubProfileRequest = z.object({
     .transform((value) => value === "true"),
 });
 
-type ContributionDay =
-  User["contributionsCollection"]["contributionCalendar"]["weeks"][number]["contributionDays"][number];
-
+export type ContributionDay = Omit<
+  User["contributionsCollection"]["contributionCalendar"]["weeks"][number]["contributionDays"][number],
+  "color"
+>;
 // TODO(nickbar01234) - Hassle to get right
 export type UserQuery = {
   user: {
@@ -22,11 +23,9 @@ export type UserQuery = {
     pullRequests: Pick<User["pullRequests"], "totalCount">;
     contributionsCollection: {
       contributionCalendar: {
-        isHalloween: User["contributionsCollection"]["contributionCalendar"]["isHalloween"];
         totalContributions: User["contributionsCollection"]["contributionCalendar"]["totalContributions"];
         weeks: Array<{
-          contributionDays: Array<Omit<ContributionDay, "contributionLevel">>;
-          firstDay: string;
+          contributionDays: Array<ContributionDay>;
         }>;
       };
     };

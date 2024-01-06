@@ -1,3 +1,4 @@
+import { ContributionDay } from "@/app/api/github/profile/route.schema";
 import { createHash } from "crypto";
 
 type Time = Record<"year" | "month" | "day" | "hour" | "min", number>;
@@ -72,37 +73,22 @@ export const contributionLevel = [
   "bg-[#216e39]",
 ] as const;
 
-export const levelToColor = (isHalloween: boolean, color: string) => {
-  if (isHalloween) {
-    switch (color) {
-      case "#ffee4a":
-        return contributionLevel[1];
-      case "#ffc501":
-        return contributionLevel[2];
-      case "#fe9600":
-        return contributionLevel[3];
-      case "#03001c":
-        return contributionLevel[4];
-      default:
-        return contributionLevel[0];
-    }
-  } else {
-    switch (color) {
-      case "#9be9a8":
-        return "bg-[#9be9a8]";
+export const levelToColor = (level: ContributionDay["contributionLevel"]) => {
+  switch (level) {
+    case "FIRST_QUARTILE":
+      return "bg-[#9be9a8]";
 
-      case "#40c463":
-        return "bg-[#40c463]";
+    case "SECOND_QUARTILE":
+      return "bg-[#40c463]";
 
-      case "#30a14e":
-        return "bg-[#30a14e]";
+    case "THIRD_QUARTILE":
+      return "bg-[#30a14e]";
 
-      case "#216e39":
-        return "bg-[#216e39]";
+    case "FOURTH_QUARTILE":
+      return "bg-[#216e39]";
 
-      default:
-        return "bg-comment";
-    }
+    default:
+      return "bg-comment";
   }
 };
 

@@ -1,6 +1,7 @@
 import { GithubProfile } from "@/app/api";
 import { contributionLevel, levelToColor } from "@/utils";
 import React from "react";
+import ContributionSquare from "./ContributionSquare";
 
 interface GithubCalendarProps {
   contributionCollection:
@@ -26,6 +27,7 @@ const MONTHS = [
 
 const GithubCalendar = (props: GithubCalendarProps) => {
   const { contributionCollection } = props;
+  const [contributionText, setContributionText] = React.useState("");
 
   if (contributionCollection === undefined) {
     return null;
@@ -60,18 +62,13 @@ const GithubCalendar = (props: GithubCalendarProps) => {
               ...week,
             ];
 
-            return padded.map((value, idx) => {
-              return (
-                <div
-                  className={`h-4 w-4 rounded-sm ${
-                    value === undefined
-                      ? "invisible"
-                      : levelToColor(false, value.color)
-                  }`}
-                  key={idx}
-                />
-              );
-            });
+            return padded.map((day, idx) => (
+              <ContributionSquare
+                key={idx}
+                day={day}
+                setContributionText={setContributionText}
+              />
+            ));
           });
 
           return (
@@ -91,12 +88,15 @@ const GithubCalendar = (props: GithubCalendarProps) => {
         })}
       </div>
       <div className="flex justify-between items-center">
-        <div className="flex gap-x-1">
-          {contributionLevel.map((value) => (
-            <div key={value} className={`h-3 w-3 rounded-sm ${value}`} />
-          ))}
+        <div className="flex items-center gap-x-4">
+          <div className="flex gap-x-1">
+            {contributionLevel.map((value) => (
+              <div key={value} className={`h-3 w-3 rounded-sm ${value}`} />
+            ))}
+          </div>
+          <div className="text-sm">{props.year}</div>
         </div>
-        <div>{props.year}</div>
+        <div className="text-sm sm:block hidden">{contributionText}</div>
       </div>
     </div>
   );
