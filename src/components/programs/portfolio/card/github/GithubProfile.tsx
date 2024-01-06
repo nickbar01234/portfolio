@@ -28,7 +28,7 @@ const GithubProfile = () => {
   }, [year]);
 
   return (
-    <div className="flex flex-col gap-y-2 bg-bg-highlight p-2.5 rounded h-full w-full justify-between">
+    <div className="flex flex-col gap-y-2 bg-bg-highlight p-6 rounded h-full w-full justify-between">
       <Loader loading={githubProfile === null}>
         <div className="flex gap-x-4 items-center">
           <Image

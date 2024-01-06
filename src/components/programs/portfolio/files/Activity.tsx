@@ -33,7 +33,7 @@ const Activity: Component = ({ active, typingCommand }) => {
           <iframe
             src="https://www.google.com/maps/d/u/0/embed?mid=19IBsB2RXDNZIoS0HES_gQJ_TwZS2DOQ&ehbc=2E312F"
             className="w-full text-text"
-            height="480"
+            height="560"
           />
         </div>
       </NumberedLine>
