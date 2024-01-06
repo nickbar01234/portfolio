@@ -24,6 +24,18 @@ const About: Component = ({ active, typingCommand }) => {
     <EditorProvider active={active} typingCommand={typingCommand}>
       <NumberedLine>
         <pre>
+          <Syntax.Comment>
+            {`/**
+ * pssst! Are you a Vim user?
+ * Type `}
+          </Syntax.Comment>
+          <Syntax.Keyword>:help</Syntax.Keyword>
+          <Syntax.Comment>{` to get keyboard bindings
+ */`}</Syntax.Comment>
+        </pre>
+      </NumberedLine>
+      <NumberedLine>
+        <pre>
           <Syntax.Statement>
             <Syntax.Decl>const</Syntax.Decl> <Syntax.Id>name</Syntax.Id>{" "}
             <Syntax.Keyword>=</Syntax.Keyword>{" "}
@@ -36,6 +48,15 @@ const About: Component = ({ active, typingCommand }) => {
           <Syntax.Statement>
             <Syntax.Decl>let</Syntax.Decl> <Syntax.Id>age</Syntax.Id>{" "}
             <Syntax.Keyword>=</Syntax.Keyword> <Syntax.Id>undefined</Syntax.Id>
+          </Syntax.Statement>
+        </pre>
+      </NumberedLine>
+      <NumberedLine>
+        <pre>
+          <Syntax.Statement>
+            <Syntax.Decl>const</Syntax.Decl> <Syntax.Id>nationality</Syntax.Id>{" "}
+            <Syntax.Keyword>=</Syntax.Keyword>{" "}
+            <Syntax.String>Vietnam</Syntax.String> 🇻🇳
           </Syntax.Statement>
         </pre>
       </NumberedLine>
