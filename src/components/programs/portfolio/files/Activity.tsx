@@ -32,7 +32,7 @@ const Activity: Component = ({ active, typingCommand }) => {
         <div className="w-full bg-bg-highlight p-8 rounded">
           <iframe
             src="https://www.google.com/maps/d/u/0/embed?mid=19IBsB2RXDNZIoS0HES_gQJ_TwZS2DOQ&ehbc=2E312F"
-            className="w-full"
+            className="w-full text-text"
             height="480"
           />
         </div>

@@ -109,3 +109,7 @@ export const levelToColor = (isHalloween: boolean, color: string) => {
 export const numberWithCommas = (number: number) => {
   return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };
+
+export const asFloat = (numerator: number | undefined, denominator: number) => {
+  return ((numerator ?? 0) * 1.0) / denominator;
+};

@@ -5,6 +5,8 @@ import React from "react";
 import { z } from "zod";
 import HealthStatistic from "./HealthStatistic";
 import moment from "moment";
+import { ActivityRings } from "@jonasdoesthings/react-activity-rings";
+import { asFloat } from "@/utils";
 
 const AppleHealthProfile = () => {
   const [appleHealth, setAppleHealth] = React.useState<z.infer<
@@ -17,7 +19,31 @@ const AppleHealthProfile = () => {
 
   return (
     <Loader loading={appleHealth === null}>
-      <div className="h-full w-full bg-bg-highlight rounded p-6">
+      <div className="h-full w-full bg-bg-highlight rounded p-6 flex flex-col justify-between">
+        <div className="self-end">
+          <ActivityRings
+            rings={[
+              {
+                filledPercentage: asFloat(appleHealth?.standHours, 12),
+                color: "#9cd1bb",
+              },
+              {
+                filledPercentage: asFloat(appleHealth?.workoutTime, 30),
+                color: "#bad761",
+              },
+              {
+                filledPercentage: asFloat(appleHealth?.calories, 600),
+                color: "#ff657a",
+              },
+            ]}
+            options={{
+              containerHeight: "64px",
+              containerWidth: "64px",
+              animationDurationMillis: 2000,
+              backgroundOpacity: 0.4,
+            }}
+          />
+        </div>
         <div className="h-full w-full flex flex-col justify-between gap-y-4 overflow-x-auto scrollbar">
           <div className="h-full w-full flex flex-col justify-evenly gap-y-2">
             <HealthStatistic

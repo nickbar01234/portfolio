@@ -20,6 +20,9 @@ dependencies:
   '@fortawesome/react-fontawesome':
     specifier: ^0.2.0
     version: 0.2.0(@fortawesome/fontawesome-svg-core@6.4.2)(react@18.2.0)
+  '@jonasdoesthings/react-activity-rings':
+    specifier: ^1.1.2
+    version: 1.1.2(react-dom@18.2.0)(react@18.2.0)
   '@octokit/graphql-schema':
     specifier: ^14.46.0
     version: 14.46.0
@@ -210,6 +213,16 @@ packages:
       wrap-ansi: 8.1.0
       wrap-ansi-cjs: /wrap-ansi@7.0.0
     dev: true
+
+  /@jonasdoesthings/react-activity-rings@1.1.2(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-2OcJZq+f7rnaDT0mCYhhtHK2ppj7KT6xDWUb6KXZv1+tZs8L71hnrqkHFNFgGnFWuNeQjH4+4FkZm5nSntROew==}
+    peerDependencies:
+      react: ^17 || ^18
+      react-dom: ^17 || ^18
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    dev: false
 
   /@jridgewell/gen-mapping@0.3.3:
     resolution: {integrity: sha512-HLhSWOLRi875zjjMG/r+Nv0oCW8umGb0BgEhyX3dDX3egwZtB8PqLnjz3yedt8R5StBrzcg4aBpnh8UA9D1BoQ==}
