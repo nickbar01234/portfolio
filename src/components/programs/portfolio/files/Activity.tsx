@@ -27,6 +27,16 @@ const Activity: Component = ({ active, typingCommand }) => {
           </div>
         </div>
       </NumberedLine>
+      <NumberedLine />
+      <NumberedLine>
+        <div className="w-full bg-bg-highlight p-8 rounded">
+          <iframe
+            src="https://www.google.com/maps/d/u/0/embed?mid=19IBsB2RXDNZIoS0HES_gQJ_TwZS2DOQ&ehbc=2E312F"
+            className="w-full"
+            height="480"
+          />
+        </div>
+      </NumberedLine>
     </EditorProvider>
   );
 };
