@@ -14,12 +14,14 @@ const AppleHealthProfile = () => {
   > | null>(null);
 
   React.useEffect(() => {
-    getAppleHealth({ body: {} }, true).then((res) => setAppleHealth(res));
+    getAppleHealth({ body: {} }, process.env.NODE_ENV === "development").then(
+      (res) => setAppleHealth(res)
+    );
   }, []);
 
   return (
-    <Loader loading={appleHealth === null}>
-      <div className="h-full w-full bg-bg-highlight rounded p-6 flex flex-col justify-between">
+    <div className="h-full w-full bg-bg-highlight rounded p-6 flex flex-col justify-between">
+      <Loader loading={appleHealth === null}>
         <div className="self-end">
           <ActivityRings
             rings={[
@@ -77,11 +79,13 @@ const AppleHealthProfile = () => {
           </div>
           <div className="italic text-sm whitespace-nowrap">
             Last synced{" "}
-            {moment(appleHealth?.lastModified).format("HH:MMa YYYY-MM-DD")}
+            {moment
+              .parseZone(appleHealth?.lastModified)
+              .format("HH:MM YYYY-MM-DD")}
           </div>
         </div>
-      </div>
-    </Loader>
+      </Loader>
+    </div>
   );
 };
 

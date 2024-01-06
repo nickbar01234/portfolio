@@ -17,12 +17,7 @@ export const getAppleHealth = async (
     });
   }
 
-  // TODO(nickbar01234) - Read dynamically
-  return getAppleHealthResponse.parse({
-    calories: 500,
-    workoutTime: 45,
-    standHours: 30,
-    stepCount: 2650,
-    lastModified: new Date().toISOString(),
-  });
+  const { body, ...rest } = req;
+  const data = await fetch("/api/google/drive", { method: "GET", ...rest });
+  return getAppleHealthResponse.parse(await data.json());
 };

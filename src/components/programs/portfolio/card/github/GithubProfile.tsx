@@ -2505,8 +2505,8 @@ const GithubProfile = () => {
   // }, [year]);
 
   return (
-    <Loader loading={githubProfile === null}>
-      <div className="flex flex-col gap-y-2 bg-bg-highlight p-2.5 rounded h-full w-full justify-between">
+    <div className="flex flex-col gap-y-2 bg-bg-highlight p-2.5 rounded h-full w-full justify-between">
+      <Loader loading={githubProfile === null}>
         <div className="flex gap-x-4 items-center">
           <Image
             src={githubProfile?.user.avatarUrl ?? ""}
@@ -2551,8 +2551,8 @@ const GithubProfile = () => {
           contributionCollection={githubProfile?.user.contributionsCollection}
           year={year}
         />
-      </div>
-    </Loader>
+      </Loader>
+    </div>
   );
 };
 
