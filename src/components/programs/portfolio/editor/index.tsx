@@ -1,3 +1,5 @@
+"use client";
+
 import EditorProvider, { EditorContext } from "./EditorProvider";
 
 export { default as Hideable } from "./Hideable";

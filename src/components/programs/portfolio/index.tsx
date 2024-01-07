@@ -8,8 +8,12 @@ import { useCommandListener } from "@/hooks/vim";
 import { Component } from "@/type";
 import Directory from "./navigation/Directory";
 import { PortfolioContext } from "..";
+import { useRouter } from "next/navigation";
 
-const App = () => {
+interface AppProps {
+  file?: React.ReactNode;
+}
+const App = ({ file }: AppProps) => {
   const {
     files,
     tabs,
@@ -23,6 +27,7 @@ const App = () => {
   const fileMetadata = React.useMemo(() => {
     return files.find((file) => file.File.id === activeTabId);
   }, [activeTabId, files]);
+  const router = useRouter();
 
   const { command, listening: commandListenerActive } = useCommandListener({});
   useClosePortfolio({ tabs });
@@ -33,6 +38,7 @@ const App = () => {
     );
     setActiveTabId(file.id);
     setDisplayDirectory(false);
+    router.push(`/portfolio/${file.displayName.toLowerCase()}`);
   };
 
   return (
@@ -51,21 +57,7 @@ const App = () => {
             setActiveTabId={setActiveTabId}
           />
         </div>
-        {/* <div className="h-full w-full overflow-x-auto scrollbar"> */}
-        <div className="h-full w-full overflow-y-auto scrollbar">
-          {tabs.length === 0 ? (
-            <div></div>
-          ) : (
-            files.map((file) => (
-              <file.File
-                active={file.File.id === activeTabId}
-                key={file.File.id}
-                typingCommand={commandListenerActive}
-              />
-            ))
-          )}
-          {/* </div> */}
-        </div>
+        <div className="h-full w-full overflow-y-auto scrollbar">{file}</div>
         <Footer
           author={fileMetadata?.author}
           lastModified={fileMetadata?.modified}

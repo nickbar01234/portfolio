@@ -1,6 +1,4 @@
 import { Component } from "@/type";
-import { faReact } from "@fortawesome/free-brands-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { PopUp } from "../editor";
 import { PortfolioContext } from "../..";

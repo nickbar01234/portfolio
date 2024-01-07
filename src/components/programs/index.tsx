@@ -42,7 +42,11 @@ const PortfolioContext = React.createContext<PortfolioContext>(
   {} as PortfolioContext
 );
 
-const Portfolio = () => {
+interface PortfolioProps {
+  children?: React.ReactNode;
+}
+
+const Portfolio = ({ children }: PortfolioProps) => {
   const [fetching, setFetching] = React.useState(true);
   const [tabs, setTabs] = React.useState([Activity]);
   const [activeTabId, setActiveTabId] = React.useState(Activity.id);
@@ -99,7 +103,7 @@ const Portfolio = () => {
           },
         }}
       >
-        <App />
+        <App file={children} />
       </PortfolioContext.Provider>
     </Loader>
   );
