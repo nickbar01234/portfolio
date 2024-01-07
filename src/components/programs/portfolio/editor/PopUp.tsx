@@ -47,17 +47,21 @@ const PopUp = (props: PopUpProps) => {
           onMouseEnter={() => setExpandIconVisible(true)}
           onMouseLeave={() => setExpandIconVisible(false)}
         >
-          <div className={expandIconVisible ? "visible" : "invisible"}>
+          <div
+            className={`relative ${
+              expandIconVisible ? "visible" : "invisible"
+            }`}
+          >
             {expand ? (
               <FontAwesomeIcon
                 icon={faDownLeftAndUpRightToCenter}
-                className="w-2 h-2 text-bg-highlight"
+                className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-2 h-2 text-bg-highlight"
                 transform={{ flipY: true }}
               />
             ) : (
               <FontAwesomeIcon
                 icon={faUpRightAndDownLeftFromCenter}
-                className="w-2 h-2 text-bg-highlight"
+                className="w-2 h-2 text-bg-highlight absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2"
                 transform={{ flipY: true }}
               />
             )}
