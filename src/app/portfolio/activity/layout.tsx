@@ -1,4 +1,3 @@
-import { Loading } from "@/components/layout";
 import EditorProvider, {
   NumberedLine,
 } from "@/components/programs/portfolio/editor";
@@ -24,12 +23,8 @@ const Layout = ({ github, apple }: LayoutProps) => {
         <NumberedLine></NumberedLine>
         <NumberedLine>
           <div className="w-full grid grid-cols-12 gap-4 overflow-hidden">
-            <div className="lg:col-span-8 col-span-12 min-h-56">
-              <Suspense fallback={Loading}>{github}</Suspense>
-            </div>
-            <div className="lg:col-span-4 col-span-12">
-              <Suspense fallback={Loading}>{apple}</Suspense>
-            </div>
+            <div className="lg:col-span-8 col-span-12 min-h-56">{github}</div>
+            <div className="lg:col-span-4 col-span-12">{apple}</div>
           </div>
         </NumberedLine>
         <NumberedLine />

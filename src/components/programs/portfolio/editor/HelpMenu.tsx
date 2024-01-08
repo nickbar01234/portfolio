@@ -45,7 +45,7 @@ const HelpMenu = ({ displayHelp, setDisplayHelp }: HelpMenuProps) => {
   }
 
   return (
-    <PopUp setDisplayPopUp={setDisplayHelp}>
+    <PopUp displayPopUp={displayHelp} setDisplayPopUp={setDisplayHelp}>
       <div className="h-full w-full flex flex-col">
         <div className="flex w-full justify-center border-b-2 border-b-comment">
           Key Maps
