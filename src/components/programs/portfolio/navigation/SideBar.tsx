@@ -1,20 +1,17 @@
-import { Component } from "@/type";
+"use client";
+
 import { faFolder } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
-import { PortfolioContext } from "@/components/programs";
+import { PortfolioContext } from "@/context/";
 
 interface SideBarProps {
-  setTabs: React.Dispatch<React.SetStateAction<Component[]>>;
-  setActiveTabId: React.Dispatch<React.SetStateAction<string>>;
+  displayDirectory: PortfolioContext["popups"]["directory"]["display"];
+  setDisplayDirectory: PortfolioContext["popups"]["directory"]["setDisplay"];
 }
 
 const SideBar = (props: SideBarProps) => {
-  const {
-    popups: { directory },
-  } = React.useContext(PortfolioContext);
-  const { display: displayDirectory, setDisplay: setDisplayDirectory } =
-    directory;
+  const { displayDirectory, setDisplayDirectory } = props;
 
   return (
     <div className="h-full w-full flex flex-col justify-center items-center text-center gap-y-2">

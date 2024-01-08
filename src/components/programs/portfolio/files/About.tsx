@@ -1,3 +1,5 @@
+"use client";
+
 /**
  * Credit - http://www.ascii-art.de/ascii/c/coffee.txt
  */
@@ -131,7 +133,6 @@ const About: Component = ({ active, typingCommand }) => {
 };
 
 About.displayName = "About";
-About.path = "src/components/programs/portfolio/files/About.tsx";
 About.id = hash(About.displayName);
 About.Icon = function Icon({ className = "" }) {
   return (

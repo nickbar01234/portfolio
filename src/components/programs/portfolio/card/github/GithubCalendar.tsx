@@ -1,3 +1,5 @@
+"use client";
+
 import { GithubProfile } from "@/app/api";
 import { contributionLevel, levelToColor } from "@/utils";
 import React from "react";
@@ -7,7 +9,7 @@ interface GithubCalendarProps {
   contributionCollection:
     | GithubProfile["user"]["contributionsCollection"]
     | undefined;
-  year: string;
+  year: number;
 }
 
 const MONTHS = [
@@ -53,7 +55,7 @@ const GithubCalendar = (props: GithubCalendarProps) => {
   );
 
   return (
-    <div className="flex flex-col gap-y-4 min-h-56">
+    <div className="flex flex-col gap-y-4 h-full">
       <div className="flex gap-x-3 w-full overflow-x-auto scrollbar pb-3">
         {months.map((month, idx) => {
           const weeks = month.map((week) => {

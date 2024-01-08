@@ -1,31 +1,18 @@
-import { GithubProfile, getGithubProfile } from "@/app/api";
 import React from "react";
 import { Loader } from "@/components/layout";
 import GithubCard from "./GithubCard";
 import { USERNAME } from "../../constants";
 import GithubCalendar from "./GithubCalendar";
 import Image from "next/image";
+import { getGithubProfile } from "@/server/github";
 
-const GithubProfile = () => {
-  const [githubProfile, setGithubProfile] =
-    React.useState<GithubProfile | null>(null);
+interface GithubProfileProps {
+  year: number;
+  githubProfile: Awaited<ReturnType<typeof getGithubProfile>>;
+}
 
-  const year = React.useMemo(() => {
-    const date = new Date();
-    return date.getFullYear().toString();
-  }, []);
-
-  React.useEffect(() => {
-    getGithubProfile({
-      body: {
-        username: USERNAME,
-        year: year,
-        mock: process.env.NODE_ENV === "development",
-      },
-    }).then((res) => {
-      setGithubProfile(res);
-    });
-  }, [year]);
+const GithubProfile = (props: GithubProfileProps) => {
+  const { githubProfile, year } = props;
 
   return (
     <div className="flex flex-col gap-y-2 bg-bg-highlight p-6 rounded h-full w-full justify-between">

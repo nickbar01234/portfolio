@@ -4,18 +4,23 @@ interface LoaderProps {
 }
 
 const Loader = (props: LoaderProps) => {
-  if (props.loading) {
-    return (
-      <div className="h-full w-full flex justify-center items-center">
+  return (
+    <>
+      <div
+        className={`h-full w-full flex justify-center items-center ${
+          props.loading ? "block" : "hidden"
+        }`}
+      >
         <svg
           className="animate-spin h-20 w-20 text-text border-8 border-comment rounded-full border-t-text"
           viewBox="0 0 24 24"
         />
       </div>
-    );
-  } else {
-    return <>{props.children}</>;
-  }
+      <div className={props.loading ? "hidden" : "h-full w-full block"}>
+        {props.children}
+      </div>
+    </>
+  );
 };
 
 export default Loader;
