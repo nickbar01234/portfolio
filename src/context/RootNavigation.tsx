@@ -1,5 +1,4 @@
-"use client";
-import { PortfolioContext } from "@/components/programs";
+import { PortfolioContext } from "@/context/";
 import { useRouter } from "next/navigation";
 import React from "react";
 

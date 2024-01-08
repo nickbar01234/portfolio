@@ -1,12 +1,11 @@
-import { Component } from "@/type";
+"use client";
+
 import React from "react";
 import { PopUp } from "../editor";
-import { PortfolioContext } from "../..";
+import { PortfolioContext } from "@/context/";
 import { RootNavigationContext } from "@/context";
 
-interface DirectoryProps {
-  onFileClick: (file: Component) => void;
-}
+interface DirectoryProps {}
 
 const Directory = (props: DirectoryProps) => {
   const { onFileClick } = React.useContext(RootNavigationContext);

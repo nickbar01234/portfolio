@@ -1,3 +1,5 @@
+"use client";
+
 import { getAppleHealth } from "@/app/api";
 import { getAppleHealthResponse } from "@/app/api/google/drive/route.schema";
 import { Loader } from "@/components/layout";

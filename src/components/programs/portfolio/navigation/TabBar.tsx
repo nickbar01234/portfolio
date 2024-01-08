@@ -1,22 +1,19 @@
 import { faX } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
-import { PortfolioContext } from "../..";
+import { PortfolioContext } from "@/context/";
 import { useRouter } from "next/navigation";
 import { RootNavigationContext } from "@/context";
 
 interface TabNavigationProps {
   tabs: string[];
-  setTabs: React.Dispatch<React.SetStateAction<string[]>>;
   activeTabId: string;
-  setActiveTabId: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const TabBar = (props: TabNavigationProps) => {
-  const { tabs, setTabs, activeTabId, setActiveTabId } = props;
+  const { tabs, activeTabId } = props;
   const { files } = React.useContext(PortfolioContext);
   const { onFileClick, onFileClose } = React.useContext(RootNavigationContext);
-  const router = useRouter();
 
   return (
     <div className="relative z-20 w-full bg-bg">

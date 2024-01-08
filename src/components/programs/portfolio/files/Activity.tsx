@@ -1,3 +1,5 @@
+"use client";
+
 import { Component } from "@/type";
 import { hash } from "@/utils";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";

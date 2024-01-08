@@ -1,5 +1,4 @@
-import Portfolio from "@/components/programs";
-import { RootNavigation } from "@/context";
+import { Portfolio, RootNavigation } from "@/context";
 import App from "@/components/programs/portfolio";
 
 interface LayoutProps {
@@ -10,7 +9,7 @@ const Layout = ({ children }: LayoutProps) => {
   return (
     <Portfolio>
       <RootNavigation>
-        <App file={children} />
+        <App>{children}</App>
       </RootNavigation>
     </Portfolio>
   );

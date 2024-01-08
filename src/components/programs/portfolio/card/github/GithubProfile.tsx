@@ -1,10 +1,12 @@
-import { GithubProfile, getGithubProfile } from "@/app/api";
+"use client";
+
 import React from "react";
 import { Loader } from "@/components/layout";
 import GithubCard from "./GithubCard";
 import { USERNAME } from "../../constants";
 import GithubCalendar from "./GithubCalendar";
 import Image from "next/image";
+import { getGithubProfile, GithubProfile } from "@/app/api";
 
 const GithubProfile = () => {
   const [githubProfile, setGithubProfile] =
@@ -72,7 +74,7 @@ const GithubProfile = () => {
         </div>
         <GithubCalendar
           contributionCollection={githubProfile?.user.contributionsCollection}
-          year={year}
+          year={parseInt(year)}
         />
       </Loader>
     </div>

@@ -1,13 +1,14 @@
-"use client";
-
 import { Component } from "@/type";
 import React from "react";
-import { About, Skills, Experience, Activity } from "./portfolio/files";
-import App from "./portfolio";
+import {
+  About,
+  Skills,
+  Experience,
+  Activity,
+} from "@/components/programs/portfolio/files";
 import { getGithubFileMetadata } from "@/app/api";
-import { REPO, USERNAME } from "./portfolio/constants";
-import { Loader } from "../layout";
-import { RootNavigation } from "@/context";
+import { REPO, USERNAME } from "@/components/programs/portfolio/constants";
+import { Loader } from "@/components/layout";
 
 interface File {
   displayName: string;
@@ -40,13 +41,6 @@ interface PortfolioContext {
   };
 }
 
-const FILES = [Activity, About, Skills, Experience].map((File) => ({
-  displayName: File.displayName,
-  id: File.id,
-  path: File.path,
-  Icon: File.Icon,
-}));
-
 const PortfolioContext = React.createContext<PortfolioContext>(
   {} as PortfolioContext
 );
@@ -56,6 +50,12 @@ interface PortfolioProps {
 }
 
 const Portfolio = ({ children }: PortfolioProps) => {
+  const FILES = [Activity, About, Skills, Experience].map((File) => ({
+    displayName: File.displayName,
+    id: File.id,
+    path: File.path,
+    Icon: File.Icon,
+  }));
   const [fetching, setFetching] = React.useState(true);
   const [tabs, setTabs] = React.useState([Activity.displayName]);
   const [activeTabId, setActiveTabId] = React.useState(Activity.displayName);
@@ -64,6 +64,9 @@ const Portfolio = ({ children }: PortfolioProps) => {
   const [files, setFiles] = React.useState<File[]>([]);
 
   React.useEffect(() => {
+    if (files.length > 0) {
+      return;
+    }
     const paths = FILES.map((file) => file.path);
     getGithubFileMetadata(
       {
@@ -89,7 +92,7 @@ const Portfolio = ({ children }: PortfolioProps) => {
       setFiles(files);
       setFetching(false);
     });
-  }, []);
+  }, [FILES, files.length]);
 
   return (
     <Loader loading={fetching}>

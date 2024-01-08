@@ -1,3 +1,5 @@
+"use client";
+
 import { Component } from "@/type";
 import { hash, timeBetween } from "@/utils";
 import EditorProvider, { NumberedLine, Syntax } from "../editor";

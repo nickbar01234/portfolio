@@ -1,3 +1,5 @@
+"use client";
+
 /**
  * Credit - http://www.ascii-art.de/ascii/c/coffee.txt
  */

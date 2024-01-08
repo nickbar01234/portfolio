@@ -7,7 +7,7 @@ interface GithubCalendarProps {
   contributionCollection:
     | GithubProfile["user"]["contributionsCollection"]
     | undefined;
-  year: string;
+  year: number;
 }
 
 const MONTHS = [
