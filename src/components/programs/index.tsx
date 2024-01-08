@@ -7,9 +7,13 @@ import App from "./portfolio";
 import { getGithubFileMetadata } from "@/app/api";
 import { REPO, USERNAME } from "./portfolio/constants";
 import { Loader } from "../layout";
+import { RootNavigation } from "@/context";
 
 interface File {
-  File: Component;
+  displayName: string;
+  id: string;
+  Icon: Component["Icon"];
+  path: string;
   author: string;
   modified: Date;
 }
@@ -17,8 +21,8 @@ interface File {
 interface PortfolioContext {
   files: File[];
 
-  tabs: Component[];
-  setTabs: React.Dispatch<React.SetStateAction<Component[]>>;
+  tabs: string[];
+  setTabs: React.Dispatch<React.SetStateAction<string[]>>;
 
   activeTabId: string;
   setActiveTabId: React.Dispatch<React.SetStateAction<string>>;
@@ -36,7 +40,12 @@ interface PortfolioContext {
   };
 }
 
-const FILES = [Activity, About, Skills, Experience];
+const FILES = [Activity, About, Skills, Experience].map((File) => ({
+  displayName: File.displayName,
+  id: File.id,
+  path: File.path,
+  Icon: File.Icon,
+}));
 
 const PortfolioContext = React.createContext<PortfolioContext>(
   {} as PortfolioContext
@@ -48,8 +57,8 @@ interface PortfolioProps {
 
 const Portfolio = ({ children }: PortfolioProps) => {
   const [fetching, setFetching] = React.useState(true);
-  const [tabs, setTabs] = React.useState([Activity]);
-  const [activeTabId, setActiveTabId] = React.useState(Activity.id);
+  const [tabs, setTabs] = React.useState([Activity.displayName]);
+  const [activeTabId, setActiveTabId] = React.useState(Activity.displayName);
   const [displayDirectory, setDisplayDirectory] = React.useState(false);
   const [displayHelp, setDisplayHelp] = React.useState(false);
   const [files, setFiles] = React.useState<File[]>([]);
@@ -66,13 +75,13 @@ const Portfolio = ({ children }: PortfolioProps) => {
         const metadata = res.find((v) => v.path === file.path);
         if (metadata === undefined) {
           return {
-            File: file,
+            ...file,
             author: USERNAME,
             modified: new Date(),
           };
         }
         return {
-          File: file,
+          ...file,
           author: metadata.author,
           modified: new Date(metadata.modified),
         };
@@ -103,7 +112,7 @@ const Portfolio = ({ children }: PortfolioProps) => {
           },
         }}
       >
-        <App file={children} />
+        {children}
       </PortfolioContext.Provider>
     </Loader>
   );

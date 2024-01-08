@@ -1,4 +1,5 @@
 import { PortfolioContext } from "@/components/programs";
+import { RootNavigationContext } from "@/context";
 import { Command, whichCommand } from "@/utils";
 import React from "react";
 
@@ -6,36 +7,16 @@ interface UseCommandListenerProps {}
 
 const useCommandListener = (props: UseCommandListenerProps) => {
   const {
-    files,
-    tabs,
-    setTabs,
     activeTabId,
-    setActiveTabId,
     popups: { directory, help },
   } = React.useContext(PortfolioContext);
   const { display: displayDirectory, setDisplay: setDisplayDirectory } =
     directory;
   const { display: displayHelp, setDisplay: setDisplayHelp } = help;
+  const { onFileClick, onFileClose } = React.useContext(RootNavigationContext);
 
   const [command, setCommand] = React.useState("");
   const [listening, setListening] = React.useState(false);
-
-  const executeTabNew = React.useCallback(
-    (filename: string) => {
-      const maybeFile = files.find(
-        (file) => file.File.displayName === filename
-      );
-      if (maybeFile == undefined) {
-        // TODO(nickbar01234) - Handle
-      } else {
-        if (tabs.find((tab) => tab.displayName === filename) == undefined) {
-          setTabs((prev) => [...prev, maybeFile.File]);
-        }
-        setActiveTabId(maybeFile.File.id);
-      }
-    },
-    [files, tabs, setTabs, setActiveTabId]
-  );
 
   const onKeydown = React.useCallback(
     (e: KeyboardEvent) => {
@@ -50,7 +31,7 @@ const useCommandListener = (props: UseCommandListenerProps) => {
 
             switch (whichCommand(command)) {
               case Command.TAB_NEW: {
-                executeTabNew(command.split(" ")[1]);
+                onFileClick(command.split(" ")[1]);
                 break;
               }
 
@@ -66,13 +47,7 @@ const useCommandListener = (props: UseCommandListenerProps) => {
                 } else if (displayDirectory) {
                   setDisplayDirectory(false);
                 } else {
-                  setTabs((tabs) =>
-                    tabs.filter((tab) => tab.id !== activeTabId)
-                  );
-                  // TODO(nickbar01234) - Add history stack
-                  setActiveTabId(
-                    (prev) => tabs.find((tab) => tab.id !== prev)?.id ?? ""
-                  );
+                  onFileClose(activeTabId);
                 }
                 break;
               }
@@ -107,15 +82,13 @@ const useCommandListener = (props: UseCommandListenerProps) => {
       }
     },
     [
+      onFileClick,
+      onFileClose,
       listening,
       command,
-      executeTabNew,
       setDisplayHelp,
       displayHelp,
-      setTabs,
-      setActiveTabId,
       activeTabId,
-      tabs,
       displayDirectory,
       setDisplayDirectory,
     ]

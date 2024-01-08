@@ -1,15 +1,9 @@
-import { Component } from "@/type";
 import { faFolder } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { PortfolioContext } from "@/components/programs";
 
-interface SideBarProps {
-  setTabs: React.Dispatch<React.SetStateAction<Component[]>>;
-  setActiveTabId: React.Dispatch<React.SetStateAction<string>>;
-}
-
-const SideBar = (props: SideBarProps) => {
+const SideBar = () => {
   const {
     popups: { directory },
   } = React.useContext(PortfolioContext);

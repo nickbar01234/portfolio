@@ -25,7 +25,7 @@ const App = ({ file }: AppProps) => {
   const { setDisplay: setDisplayDirectory } = directory;
   const { display: displayHelp, setDisplay: setDisplayHelp } = help;
   const fileMetadata = React.useMemo(() => {
-    return files.find((file) => file.File.id === activeTabId);
+    return files.find((file) => file.id === activeTabId);
   }, [activeTabId, files]);
   const router = useRouter();
 
@@ -34,7 +34,7 @@ const App = ({ file }: AppProps) => {
 
   const onFileClick = (file: Component) => {
     setTabs((prev) =>
-      prev.find((tab) => tab.id === file.id) ? prev : [...prev, file]
+      prev.find((tab) => tab === file.id) ? prev : [...prev, file.id]
     );
     setActiveTabId(file.id);
     setDisplayDirectory(false);
@@ -46,7 +46,7 @@ const App = ({ file }: AppProps) => {
       <HelpMenu displayHelp={displayHelp} setDisplayHelp={setDisplayHelp} />
       <Directory onFileClick={onFileClick} />
       <div className="h-full w-full bg-bg-variant py-2 border-r-2 border-r-bg-highlight">
-        <SideBar setTabs={setTabs} setActiveTabId={setActiveTabId} />
+        <SideBar />
       </div>
       <div className="h-full w-full grid md:grid-rows-[5%_87%_8%] grid-rows-[10%_80%_10%] overflow-y-hidden overscroll-none">
         <div className="pt-2 pl-2">

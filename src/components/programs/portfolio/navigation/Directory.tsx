@@ -2,13 +2,14 @@ import { Component } from "@/type";
 import React from "react";
 import { PopUp } from "../editor";
 import { PortfolioContext } from "../..";
+import { RootNavigationContext } from "@/context";
 
 interface DirectoryProps {
   onFileClick: (file: Component) => void;
 }
 
 const Directory = (props: DirectoryProps) => {
-  const { onFileClick } = props;
+  const { onFileClick } = React.useContext(RootNavigationContext);
   const {
     files,
     popups: { directory },
@@ -26,14 +27,17 @@ const Directory = (props: DirectoryProps) => {
         <div className="h-full w-full flex flex-col gap-y-2 overflow-x-hidden overflow-y-auto scrollbar">
           {files.map((file) => (
             <div
-              key={file.File.id}
+              key={file.id}
               className="grid lg:grid-cols-[5%_95%] grid-cols-[10%_90%] gap-x-2 hover:bg-comment-variant cursor-pointer"
-              onClick={() => onFileClick(file.File)}
+              onClick={() => {
+                onFileClick(file.displayName);
+                setDisplayDirectory(false);
+              }}
             >
               <div className="flex justify-end items-center">
-                <file.File.Icon />
+                <file.Icon />
               </div>
-              <span>{file.File.displayName}</span>
+              <span>{file.displayName}</span>
             </div>
           ))}
         </div>
