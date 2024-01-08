@@ -16,7 +16,7 @@ const Page = () => {
       {
         icon: <FontAwesomeIcon icon={faCog} size="lg" />,
         name: "a.out",
-        onClick: () => router.push("/portfolio"),
+        onClick: () => router.push("/portfolio/activity"),
       },
       {
         icon: <FontAwesomeIcon icon={faGithub} size="lg" />,
