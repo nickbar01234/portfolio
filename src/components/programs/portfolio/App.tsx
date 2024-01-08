@@ -48,11 +48,15 @@ const App = ({ children }: AppProps) => {
         <div className="pt-2 pl-2">
           <TabBar tabs={tabs} activeTabId={activeTabId} />
         </div>
-        <Loader loading={navigating}>
-          <div className="h-full w-full overflow-y-auto scrollbar">
-            {children}
-          </div>
-        </Loader>
+        {tabs.length > 0 ? (
+          <Loader loading={navigating}>
+            <div className="h-full w-full overflow-y-auto scrollbar">
+              {children}
+            </div>
+          </Loader>
+        ) : (
+          <div></div>
+        )}
         <Footer
           author={fileMetadata?.author}
           lastModified={fileMetadata?.modified}
