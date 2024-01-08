@@ -1,7 +1,7 @@
-import { Activity } from "@/components/programs/portfolio/files";
+"use client";
 
 const Page = () => {
-  return <Activity active={true} typingCommand={false} />;
+  return null;
 };
 
 export default Page;

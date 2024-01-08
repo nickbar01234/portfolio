@@ -5,6 +5,8 @@ import React from "react";
 interface RootNavigationContext {
   onFileClick: (displayName: string) => void;
   onFileClose: (displayName: string, event?: React.MouseEvent) => void;
+  navigating: boolean;
+  setNavigating: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 interface RootNavigationProps {
@@ -18,14 +20,15 @@ const RootNavigationContext = React.createContext<RootNavigationContext>(
 const RootNavigation = ({ children }: RootNavigationProps) => {
   const { files, tabs, setTabs, activeTabId, setActiveTabId } =
     React.useContext(PortfolioContext);
-  const router = useRouter();
+  const [navigating, setNavigating] = React.useState(false);
 
+  const router = useRouter();
   const onFileClick = React.useCallback(
     (displayName: string) => {
       const fileMetadata = files.find(
         (file) => file.displayName === displayName
       );
-      if (fileMetadata == undefined) {
+      if (fileMetadata == undefined || displayName === activeTabId) {
         return;
       }
 
@@ -33,9 +36,10 @@ const RootNavigation = ({ children }: RootNavigationProps) => {
       if (!tabs.includes(displayName)) {
         setTabs((prev) => [...prev, displayName]);
       }
+      setNavigating(true);
       router.push(`/portfolio/${displayName.toLowerCase()}`);
     },
-    [tabs, setTabs, setActiveTabId, files, router]
+    [activeTabId, tabs, setTabs, setActiveTabId, files, router]
   );
 
   const onFileClose = React.useCallback(
@@ -54,7 +58,12 @@ const RootNavigation = ({ children }: RootNavigationProps) => {
 
   return (
     <RootNavigationContext.Provider
-      value={{ onFileClick: onFileClick, onFileClose: onFileClose }}
+      value={{
+        onFileClick: onFileClick,
+        onFileClose: onFileClose,
+        navigating: navigating,
+        setNavigating: setNavigating,
+      }}
     >
       {children}
     </RootNavigationContext.Provider>

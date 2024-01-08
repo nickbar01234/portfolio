@@ -1,20 +1,17 @@
 import { Component } from "@/type";
-import React from "react";
+import React, { ContextType } from "react";
 import {
   About,
   Skills,
   Experience,
   Activity,
 } from "@/components/programs/portfolio/files";
-import { getGithubFileMetadata } from "@/app/api";
-import { REPO, USERNAME } from "@/components/programs/portfolio/constants";
-import { Loader } from "@/components/layout";
+import { getGithubFileMetadata } from "@/server/github";
 
 interface File {
   displayName: string;
   id: string;
   Icon: Component["Icon"];
-  path: string;
   author: string;
   modified: Date;
 }
@@ -47,79 +44,53 @@ const PortfolioContext = React.createContext<PortfolioContext>(
 
 interface PortfolioProps {
   children?: React.ReactNode;
+  fileMetadata: Awaited<ReturnType<typeof getGithubFileMetadata>>;
 }
 
-const Portfolio = ({ children }: PortfolioProps) => {
-  const FILES = [Activity, About, Skills, Experience].map((File) => ({
-    displayName: File.displayName,
-    id: File.id,
-    path: File.path,
-    Icon: File.Icon,
-  }));
-  const [fetching, setFetching] = React.useState(true);
+const Portfolio = ({ fileMetadata, children }: PortfolioProps) => {
   const [tabs, setTabs] = React.useState([Activity.displayName]);
   const [activeTabId, setActiveTabId] = React.useState(Activity.displayName);
   const [displayDirectory, setDisplayDirectory] = React.useState(false);
   const [displayHelp, setDisplayHelp] = React.useState(false);
-  const [files, setFiles] = React.useState<File[]>([]);
-
-  React.useEffect(() => {
-    if (files.length > 0) {
-      return;
-    }
-    const paths = FILES.map((file) => file.path);
-    getGithubFileMetadata(
-      {
-        body: { username: USERNAME, repo: REPO, paths: paths },
-      },
-      process.env.NODE_ENV === "development"
-    ).then((res) => {
-      const files: File[] = FILES.map((file) => {
-        const metadata = res.find((v) => v.path === file.path);
-        if (metadata === undefined) {
-          return {
-            ...file,
-            author: USERNAME,
-            modified: new Date(),
-          };
-        }
-        return {
-          ...file,
-          author: metadata.author,
-          modified: new Date(metadata.modified),
-        };
-      });
-      setFiles(files);
-      setFetching(false);
-    });
-  }, [FILES, files.length]);
+  const files = [Activity, About, Skills, Experience].map((File) => {
+    const metadata = fileMetadata.find(
+      (metadata) => metadata.normalizedName === File.displayName
+    );
+    return {
+      displayName: File.displayName,
+      path: metadata?.path ?? "",
+      author: metadata?.author ?? "",
+      modified: new Date(metadata?.modified ?? ""),
+      id: File.id,
+      Icon: File.Icon,
+    };
+  });
 
   return (
-    <Loader loading={fetching}>
-      <PortfolioContext.Provider
-        value={{
-          files: files,
-          tabs,
-          setTabs,
-          activeTabId,
-          setActiveTabId,
-          popups: {
-            directory: {
-              display: displayDirectory,
-              setDisplay: setDisplayDirectory,
-            },
-            help: {
-              display: displayHelp,
-              setDisplay: setDisplayHelp,
-            },
+    <PortfolioContext.Provider
+      value={{
+        files: files,
+        tabs,
+        setTabs,
+        activeTabId,
+        setActiveTabId,
+        popups: {
+          directory: {
+            display: displayDirectory,
+            setDisplay: setDisplayDirectory,
           },
-        }}
-      >
-        {children}
-      </PortfolioContext.Provider>
-    </Loader>
+          help: {
+            display: displayHelp,
+            setDisplay: setDisplayHelp,
+          },
+        },
+      }}
+    >
+      {children}
+    </PortfolioContext.Provider>
   );
 };
 
 export default Portfolio;
 export { PortfolioContext };
+export type PortfolioContextProps = ContextType<typeof PortfolioContext>;

@@ -11,7 +11,6 @@ const Experience: Component = () => {
 
 Experience.displayName = "Experience";
 Experience.id = hash(Experience.displayName);
-Experience.path = "src/components/programs/portfolio/files/Experience.tsx";
 Experience.Icon = function Icon({ className = "" }) {
   return (
     <FontAwesomeIcon icon={faMarkdown} className={`text-id ${className}`} />

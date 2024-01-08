@@ -5,12 +5,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { PortfolioContext } from "@/context/";
 
-const SideBar = () => {
-  const {
-    popups: { directory },
-  } = React.useContext(PortfolioContext);
-  const { display: displayDirectory, setDisplay: setDisplayDirectory } =
-    directory;
+interface SideBarProps {
+  displayDirectory: PortfolioContext["popups"]["directory"]["display"];
+  setDisplayDirectory: PortfolioContext["popups"]["directory"]["setDisplay"];
+}
+
+const SideBar = (props: SideBarProps) => {
+  const { displayDirectory, setDisplayDirectory } = props;
 
   return (
     <div className="h-full w-full flex flex-col justify-center items-center text-center gap-y-2">

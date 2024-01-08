@@ -10,6 +10,7 @@ import { useState } from "react";
 
 interface PopUpProps {
   children?: React.ReactNode;
+  displayPopUp: boolean;
   setDisplayPopUp: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
@@ -17,6 +18,10 @@ const PopUp = (props: PopUpProps) => {
   const [expand, setExpand] = useState(false);
   const [closeIconVisible, setCloseIconVisible] = useState(false);
   const [expandIconVisible, setExpandIconVisible] = useState(false);
+
+  if (!props.displayPopUp) {
+    return null;
+  }
 
   return (
     <div

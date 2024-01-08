@@ -125,7 +125,6 @@ const Skills: Component = ({ active, typingCommand }) => {
 };
 
 Skills.displayName = "Skills";
-Skills.path = "src/components/programs/portfolio/files/Skills.tsx";
 Skills.id = hash(Skills.displayName);
 Skills.Icon = function Icon(style) {
   return <i className={`text-active ${style}`}>{`{...}`}</i>;
