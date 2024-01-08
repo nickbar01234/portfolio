@@ -7,6 +7,7 @@ import {
   Activity,
 } from "@/components/programs/portfolio/files";
 import { getGithubFileMetadata } from "@/server/github";
+import { usePathname } from "next/navigation";
 
 interface File {
   displayName: string;
@@ -48,10 +49,6 @@ interface PortfolioProps {
 }
 
 const Portfolio = ({ fileMetadata, children }: PortfolioProps) => {
-  const [tabs, setTabs] = React.useState([Activity.displayName]);
-  const [activeTabId, setActiveTabId] = React.useState(Activity.displayName);
-  const [displayDirectory, setDisplayDirectory] = React.useState(false);
-  const [displayHelp, setDisplayHelp] = React.useState(false);
   const files = [Activity, About, Skills, Experience].map((File) => {
     const metadata = fileMetadata.find(
       (metadata) => metadata.normalizedName === File.displayName
@@ -65,6 +62,17 @@ const Portfolio = ({ fileMetadata, children }: PortfolioProps) => {
       Icon: File.Icon,
     };
   });
+
+  const pathSegment = usePathname().split("/").pop() ?? "";
+  const startFile =
+    files
+      .filter((file) => file.displayName.toLowerCase() === pathSegment)
+      .map((file) => file.displayName)
+      .pop() ?? "";
+  const [tabs, setTabs] = React.useState([startFile]);
+  const [activeTabId, setActiveTabId] = React.useState(startFile);
+  const [displayDirectory, setDisplayDirectory] = React.useState(false);
+  const [displayHelp, setDisplayHelp] = React.useState(false);
 
   return (
     <PortfolioContext.Provider
