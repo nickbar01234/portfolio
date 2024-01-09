@@ -6,7 +6,6 @@ interface IconProps {
 
 export type Component<T = {}> = React.FunctionComponent<T> & {
   displayName: string;
-  id: string;
   Icon: (props: IconProps) => JSX.Element;
 };
 

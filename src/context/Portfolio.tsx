@@ -11,7 +11,6 @@ import { usePathname } from "next/navigation";
 
 interface File {
   displayName: string;
-  id: string;
   Icon: Component["Icon"];
   author: string;
   modified: Date;
@@ -61,7 +60,6 @@ const Portfolio = ({ fileMetadata, children }: PortfolioProps) => {
       path: metadata?.path ?? "",
       author: metadata?.author ?? "",
       modified: new Date(metadata?.modified ?? ""),
-      id: File.id,
       Icon: File.Icon,
     };
   });

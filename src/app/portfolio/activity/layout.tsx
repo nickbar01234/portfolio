@@ -2,7 +2,6 @@ import EditorProvider, {
   NumberedLine,
 } from "@/components/programs/portfolio/editor";
 import { Activity } from "@/components/programs/portfolio/files";
-import { Suspense } from "react";
 
 interface LayoutProps {
   github: React.ReactNode;

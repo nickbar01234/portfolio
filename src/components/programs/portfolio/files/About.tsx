@@ -4,7 +4,6 @@
  * Credit - http://www.ascii-art.de/ascii/c/coffee.txt
  */
 import { Component } from "@/type";
-import { hash } from "@/utils";
 import React, { useState } from "react";
 import EditorProvider, { NumberedLine, Syntax } from "../editor";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -131,7 +130,6 @@ const About: Component = () => {
 };
 
 About.displayName = "About";
-About.id = hash(About.displayName);
 About.Icon = function Icon({ className = "" }) {
   return (
     <FontAwesomeIcon icon={faReact} color="#61dbfb" className={className} />

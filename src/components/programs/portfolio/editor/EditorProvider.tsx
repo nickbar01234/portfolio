@@ -1,7 +1,7 @@
 "use client";
 import { useVerticalMovement } from "@/hooks/vim";
 import React from "react";
-import { Hideable, NumberedLine } from ".";
+import { NumberedLine } from ".";
 import { PortfolioContext } from "@/context";
 
 interface EditorProviderProps {

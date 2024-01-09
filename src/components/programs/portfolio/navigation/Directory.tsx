@@ -24,7 +24,7 @@ const Directory = (props: DirectoryProps) => {
         <div className="h-full w-full flex flex-col gap-y-2 overflow-x-hidden overflow-y-auto scrollbar">
           {files.map((file) => (
             <div
-              key={file.id}
+              key={file.displayName}
               className="grid lg:grid-cols-[5%_95%] grid-cols-[10%_90%] gap-x-2 hover:bg-comment-variant cursor-pointer"
               onClick={() => {
                 onFileClick(file.displayName);

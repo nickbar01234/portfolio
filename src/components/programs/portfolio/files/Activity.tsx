@@ -1,14 +1,9 @@
 import { Component } from "@/type";
-import { hash } from "@/utils";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 
-const Activity: Component<{ children?: React.ReactNode }> = ({
-  children,
-  active,
-  typingCommand,
-}) => {
+const Activity: Component<{ children?: React.ReactNode }> = ({ children }) => {
   return (
     <React.Fragment>{children}</React.Fragment>
     // <EditorProvider active={active} typingCommand={typingCommand}>
@@ -45,7 +40,6 @@ const Activity: Component<{ children?: React.ReactNode }> = ({
 };
 
 Activity.displayName = "Activity";
-Activity.id = hash(Activity.displayName);
 Activity.Icon = function Icon(style) {
   return <FontAwesomeIcon icon={faHeart} className={`text-keyword ${style}`} />;
 };

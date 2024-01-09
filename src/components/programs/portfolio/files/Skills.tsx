@@ -1,7 +1,7 @@
 "use client";
 
 import { Component } from "@/type";
-import { hash, timeBetween } from "@/utils";
+import { timeBetween } from "@/utils";
 import EditorProvider, { NumberedLine, Syntax } from "../editor";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
@@ -125,7 +125,6 @@ const Skills: Component = () => {
 };
 
 Skills.displayName = "Skills";
-Skills.id = hash(Skills.displayName);
 Skills.Icon = function Icon(style) {
   return <i className={`text-active ${style}`}>{`{...}`}</i>;
 };
