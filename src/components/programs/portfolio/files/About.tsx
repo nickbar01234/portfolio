@@ -10,20 +10,18 @@ import EditorProvider, { NumberedLine, Syntax } from "../editor";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faReact } from "@fortawesome/free-brands-svg-icons";
 
-const About: Component = ({ active, typingCommand }) => {
+const About: Component = () => {
   const [procastinateFor, setProcastinateFor] = useState(0);
 
   React.useEffect(() => {
     const interval = setInterval(() => {
-      if (active) {
-        setProcastinateFor((prev) => prev + 1);
-      }
+      setProcastinateFor((prev) => prev + 1);
     }, 1000);
     return () => clearInterval(interval);
-  }, [active]);
+  }, []);
 
   return (
-    <EditorProvider active={active} typingCommand={typingCommand}>
+    <EditorProvider>
       <NumberedLine>
         <pre>
           <Syntax.Comment>

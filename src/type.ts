@@ -4,9 +4,7 @@ interface IconProps {
   className?: string;
 }
 
-export type Component<T = {}> = React.FunctionComponent<
-  T & { active: boolean; typingCommand: boolean }
-> & {
+export type Component<T = {}> = React.FunctionComponent<T> & {
   displayName: string;
   id: string;
   Icon: (props: IconProps) => JSX.Element;

@@ -8,6 +8,8 @@ const useCommandListener = (props: UseCommandListenerProps) => {
   const {
     activeTabId,
     popups: { directory, help },
+    commandListenerActive,
+    setCommandListenerActive,
   } = React.useContext(PortfolioContext);
   const { display: displayDirectory, setDisplay: setDisplayDirectory } =
     directory;
@@ -15,18 +17,17 @@ const useCommandListener = (props: UseCommandListenerProps) => {
   const { onFileClick, onFileClose } = React.useContext(RootNavigationContext);
 
   const [command, setCommand] = React.useState("");
-  const [listening, setListening] = React.useState(false);
 
   const onKeydown = React.useCallback(
     (e: KeyboardEvent) => {
-      if (!listening && e.key === ":") {
-        setListening(true);
+      if (!commandListenerActive && e.key === ":") {
+        setCommandListenerActive(true);
         setCommand(":");
-      } else if (listening) {
+      } else if (commandListenerActive) {
         switch (e.key) {
           case "Enter":
             setCommand("");
-            setListening(false);
+            setCommandListenerActive(false);
 
             switch (whichCommand(command)) {
               case Command.TAB_NEW: {
@@ -64,13 +65,13 @@ const useCommandListener = (props: UseCommandListenerProps) => {
             const newCommand = command.slice(0, command.length - 1);
             setCommand(newCommand);
             if (newCommand.length === 0) {
-              setListening(false);
+              setCommandListenerActive(false);
             }
             break;
 
           case "Escape":
             setCommand("");
-            setListening(false);
+            setCommandListenerActive(false);
             break;
 
           default:
@@ -83,7 +84,8 @@ const useCommandListener = (props: UseCommandListenerProps) => {
     [
       onFileClick,
       onFileClose,
-      listening,
+      commandListenerActive,
+      setCommandListenerActive,
       command,
       setDisplayHelp,
       displayHelp,
@@ -98,7 +100,7 @@ const useCommandListener = (props: UseCommandListenerProps) => {
     return () => window.removeEventListener("keydown", onKeydown);
   });
 
-  return { command, listening };
+  return { command };
 };
 
 export default useCommandListener;

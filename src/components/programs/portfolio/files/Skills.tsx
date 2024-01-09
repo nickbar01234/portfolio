@@ -40,14 +40,14 @@ export const PROGRAMMING_LANGUAGES = [
 
 export const DOMAINS = ["frontend", "backend", "infra"];
 
-const Skills: Component = ({ active, typingCommand }) => {
+const Skills: Component = () => {
   const yoe = React.useMemo(() => {
     const { year } = timeBetween(FIRST_SWE_INTERNSHIP);
     return year;
   }, []);
 
   return (
-    <EditorProvider active={active} typingCommand={typingCommand}>
+    <EditorProvider>
       <NumberedLine>
         <pre className="text-keyword">{"{"}</pre>
       </NumberedLine>

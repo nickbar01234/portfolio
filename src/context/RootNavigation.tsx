@@ -20,7 +20,7 @@ const RootNavigationContext = React.createContext<RootNavigationContext>(
 const RootNavigation = ({ children }: RootNavigationProps) => {
   const { files, tabs, setTabs, activeTabId, setActiveTabId } =
     React.useContext(PortfolioContext);
-  const [navigating, setNavigating] = React.useState(false);
+  const [navigating, setNavigating] = React.useState(true);
 
   const router = useRouter();
   const onFileClick = React.useCallback(
@@ -49,6 +49,7 @@ const RootNavigation = ({ children }: RootNavigationProps) => {
       setTabs((tabs) => tabs.filter((tab) => tab !== displayName));
       if (displayName === activeTabId) {
         const newActiveTab = tabs.find((tab) => tab !== displayName) ?? "";
+        setNavigating(true);
         setActiveTabId(newActiveTab);
         router.push(`/portfolio/${newActiveTab.toLowerCase()}`);
       }

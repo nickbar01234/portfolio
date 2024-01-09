@@ -27,7 +27,7 @@ const App = ({ children }: AppProps) => {
     return files.find((file) => file.displayName === activeTabId);
   }, [activeTabId, files]);
 
-  const { command, listening: commandListenerActive } = useCommandListener({});
+  const { command } = useCommandListener({});
   useClosePortfolio({ tabs });
 
   return (

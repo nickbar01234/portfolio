@@ -37,6 +37,9 @@ interface PortfolioContext {
       setDisplay: React.Dispatch<React.SetStateAction<boolean>>;
     };
   };
+
+  commandListenerActive: boolean;
+  setCommandListenerActive: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const PortfolioContext = React.createContext<PortfolioContext>(
@@ -73,6 +76,8 @@ const Portfolio = ({ fileMetadata, children }: PortfolioProps) => {
   const [activeTabId, setActiveTabId] = React.useState(startFile);
   const [displayDirectory, setDisplayDirectory] = React.useState(false);
   const [displayHelp, setDisplayHelp] = React.useState(false);
+  const [commandListenerActive, setCommandListenerActive] =
+    React.useState(false);
 
   return (
     <PortfolioContext.Provider
@@ -92,6 +97,8 @@ const Portfolio = ({ fileMetadata, children }: PortfolioProps) => {
             setDisplay: setDisplayHelp,
           },
         },
+        commandListenerActive: commandListenerActive,
+        setCommandListenerActive: setCommandListenerActive,
       }}
     >
       {children}

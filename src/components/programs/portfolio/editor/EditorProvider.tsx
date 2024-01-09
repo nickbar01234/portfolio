@@ -2,11 +2,10 @@
 import { useVerticalMovement } from "@/hooks/vim";
 import React from "react";
 import { Hideable, NumberedLine } from ".";
+import { PortfolioContext } from "@/context";
 
 interface EditorProviderProps {
   children?: React.ReactNode;
-  active: boolean;
-  typingCommand: boolean;
 }
 
 interface EditorContext {
@@ -21,7 +20,7 @@ export const EditorContext = React.createContext<EditorContext>(
 );
 
 const EditorProvider = (props: EditorProviderProps) => {
-  const { active, typingCommand } = props;
+  const { commandListenerActive } = React.useContext(PortfolioContext);
   const [ids, setIds] = React.useState<string[]>([]);
   const [activeId, setActiveId] = React.useState<string>("");
 
@@ -35,27 +34,25 @@ const EditorProvider = (props: EditorProviderProps) => {
     ids,
     activeId,
     setActiveId,
-    shouldListen: active && !typingCommand,
+    shouldListen: !commandListenerActive,
   });
 
   return (
-    <Hideable active={active}>
-      <EditorContext.Provider
-        value={{
-          ids: ids,
-          setIds: setIds,
-          activeId: activeId,
-          setActiveId: setActiveId,
-        }}
-      >
-        <div className="relative z-0 flex flex-col h-full px-2">
-          <div className="h-full overflow-y-auto scrollbar">
-            {props.children}
-            <NumberedLine />
-          </div>
+    <EditorContext.Provider
+      value={{
+        ids: ids,
+        setIds: setIds,
+        activeId: activeId,
+        setActiveId: setActiveId,
+      }}
+    >
+      <div className="relative z-0 flex flex-col h-full px-2">
+        <div className="h-full overflow-y-auto scrollbar">
+          {props.children}
+          <NumberedLine />
         </div>
-      </EditorContext.Provider>
-    </Hideable>
+      </div>
+    </EditorContext.Provider>
   );
 };
 

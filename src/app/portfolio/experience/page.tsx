@@ -3,7 +3,7 @@
 import { Experience } from "@/components/programs/portfolio/files";
 
 const Page = () => {
-  return <Experience active typingCommand={false} />;
+  return <Experience />;
 };
 
 export default Page;

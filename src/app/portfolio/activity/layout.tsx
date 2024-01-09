@@ -11,8 +11,8 @@ interface LayoutProps {
 
 const Layout = ({ github, apple }: LayoutProps) => {
   return (
-    <Activity active={true} typingCommand={false}>
-      <EditorProvider active={true} typingCommand={false}>
+    <Activity>
+      <EditorProvider>
         <NumberedLine>
           <div className="flex justify-center w-full">
             <div className="italic text-comment font-medium">

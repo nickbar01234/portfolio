@@ -1,10 +1,11 @@
 "use client";
 
-import { RootNavigationContext } from "@/context";
+import { PortfolioContext, RootNavigationContext } from "@/context";
 import { usePathname, useSearchParams } from "next/navigation";
 import React from "react";
 
 const NavigationEvent = () => {
+  const { setCommandListenerActive } = React.useContext(PortfolioContext);
   const { setNavigating } = React.useContext(RootNavigationContext);
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -12,7 +13,8 @@ const NavigationEvent = () => {
   React.useEffect(() => {
     const _ = `${pathname}?${searchParams}`;
     setNavigating(false);
-  }, [pathname, searchParams, setNavigating]);
+    setCommandListenerActive(false);
+  }, [pathname, searchParams, setNavigating, setCommandListenerActive]);
 
   return null;
 };
