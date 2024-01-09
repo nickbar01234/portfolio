@@ -33,7 +33,7 @@ const NumberedLine = ({ ident, children }: NumberedLineProps) => {
         <span className="text-comment text-sm">{ids.indexOf(id)}</span>
       </div>
       {ident != undefined && <pre>{" ".repeat(ident)}</pre>}
-      {children}
+      <div className="w-full px-2">{children}</div>
     </div>
   );
 };
