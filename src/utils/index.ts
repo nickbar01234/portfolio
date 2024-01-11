@@ -1,4 +1,5 @@
 import { ContributionDay } from "@/app/api/github/profile/route.schema";
+import { Directory, File } from "@/type";
 import { createHash } from "crypto";
 
 type Time = Record<"year" | "month" | "day" | "hour" | "min", number>;
@@ -98,4 +99,37 @@ export const numberWithCommas = (number: number) => {
 
 export const asFloat = (numerator: number | undefined, denominator: number) => {
   return ((numerator ?? 0) * 1.0) / denominator;
+};
+
+export const walkDirectory = <T, U>(
+  directory: Directory<T>,
+  decorator: (file: File<T>) => File<U>
+): Directory<U> => {
+  return {
+    ...directory,
+    files: directory.files.map((file) => decorator(file)),
+    directories: directory.directories.map((directory) =>
+      walkDirectory(directory, decorator)
+    ),
+  };
+};
+
+export const searchDirectory = <T>(
+  directory: Directory<T>,
+  predicate: (file: File<T>) => boolean
+): File<T> | undefined => {
+  for (const file of directory.files) {
+    if (predicate(file)) {
+      return file;
+    }
+  }
+
+  for (const dir of directory.directories) {
+    const file = searchDirectory(dir, predicate);
+    if (file != undefined) {
+      return file;
+    }
+  }
+
+  return undefined;
 };

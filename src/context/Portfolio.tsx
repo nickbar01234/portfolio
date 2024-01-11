@@ -1,29 +1,32 @@
-import { Component } from "@/type";
+import { Component, Directory, File } from "@/type";
 import React, { ContextType } from "react";
 import {
   About,
   Skills,
   Experience,
   Activity,
+  CreatingNpmPackage,
 } from "@/components/programs/portfolio/files";
 import { getGithubFileMetadata } from "@/server/github";
 import { usePathname } from "next/navigation";
+import { searchDirectory, walkDirectory } from "@/utils";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faReact } from "@fortawesome/free-brands-svg-icons";
 
-interface File {
-  displayName: string;
-  Icon: Component["Icon"];
+type FileMetadata = {
   author: string;
-  modified: Date;
-}
+  modified: string;
+  Icon: Component["Icon"];
+};
 
 interface PortfolioContext {
-  files: File[];
+  files: Directory<FileMetadata>;
 
-  tabs: string[];
-  setTabs: React.Dispatch<React.SetStateAction<string[]>>;
+  tabs: File<FileMetadata>[];
+  setTabs: React.Dispatch<React.SetStateAction<File<FileMetadata>[]>>;
 
-  activeTabId: string;
-  setActiveTabId: React.Dispatch<React.SetStateAction<string>>;
+  activeTabId: File<FileMetadata>;
+  setActiveTabId: React.Dispatch<React.SetStateAction<File<FileMetadata>>>;
 
   popups: {
     directory: {
@@ -51,25 +54,50 @@ interface PortfolioProps {
 }
 
 const Portfolio = ({ fileMetadata, children }: PortfolioProps) => {
-  const files = [Activity, About, Skills, Experience].map((File) => {
-    const metadata = fileMetadata.find(
-      (metadata) => metadata.normalizedName === File.displayName
-    );
-    return {
-      displayName: File.displayName,
-      path: metadata?.path ?? "",
-      author: metadata?.author ?? "",
-      modified: new Date(metadata?.modified ?? ""),
-      Icon: File.Icon,
-    };
-  });
+  const files: PortfolioContext["files"] = walkDirectory(
+    fileMetadata,
+    (file) => {
+      const component = [
+        Activity,
+        About,
+        Skills,
+        Experience,
+        CreatingNpmPackage,
+      ].find((c) => c.displayName === file.displayName);
+      return {
+        ...file,
+        Icon:
+          component?.Icon ??
+          function Icon({ className }) {
+            return (
+              <FontAwesomeIcon
+                icon={faReact}
+                color="#61dbfb"
+                className={className}
+              />
+            );
+          },
+      };
+    }
+  );
 
-  const pathSegment = usePathname().split("/").pop() ?? "";
-  const startFile =
-    files
-      .filter((file) => file.displayName.toLowerCase() === pathSegment)
-      .map((file) => file.displayName)
-      .pop() ?? "";
+  // [Activity, About, Skills, Experience].map((File) => {
+  //   const metadata = fileMetadata.find(
+  //     (metadata) => metadata.normalizedName === File.displayName
+  //   );
+  //   return {
+  //     displayName: File.displayName,
+  //     path: metadata?.path ?? "",
+  //     author: metadata?.author ?? "",
+  //     modified: new Date(metadata?.modified ?? ""),
+  //     Icon: File.Icon,
+  //   };
+  // });
+
+  const pathSegment = usePathname();
+  const startFile = searchDirectory(files, (file) =>
+    pathSegment.endsWith(file.relativePath)
+  )!;
   const [tabs, setTabs] = React.useState([startFile]);
   const [activeTabId, setActiveTabId] = React.useState(startFile);
   const [displayDirectory, setDisplayDirectory] = React.useState(false);
@@ -107,3 +135,4 @@ const Portfolio = ({ fileMetadata, children }: PortfolioProps) => {
 export default Portfolio;
 export { PortfolioContext };
 export type PortfolioContextProps = ContextType<typeof PortfolioContext>;
+export type FullFile = File<FileMetadata>;

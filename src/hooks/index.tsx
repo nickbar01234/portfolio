@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import React from "react";
 
 interface UseClosePortfolioProps {
-  tabs: string[];
+  tabs: any[];
 }
 
 export const useClosePortfolio = ({ tabs }: UseClosePortfolioProps) => {

@@ -15,7 +15,7 @@ const GithubProfile = (props: GithubProfileProps) => {
   const { githubProfile, year } = props;
 
   return (
-    <div className="flex flex-col gap-y-2 bg-bg-highlight p-6 rounded h-full w-full justify-between">
+    <div className="flex flex-col gap-y-2 bg-bg-highlight md:p-6 p-3 rounded h-full w-full justify-between">
       <div className="flex gap-x-4 items-center">
         <Image
           src={githubProfile.user.avatarUrl}
@@ -25,7 +25,7 @@ const GithubProfile = (props: GithubProfileProps) => {
           height={0}
           sizes="100vw"
         />
-        <h1 className="text-3xl font-semibold">{USERNAME}</h1>
+        <h1 className="md:text-3xl text-2xl font-semibold">{USERNAME}</h1>
       </div>
       <div className="grid grid-cols-12 gap-x-2 gap-y-2">
         <div className="lg:col-span-3 col-span-6">

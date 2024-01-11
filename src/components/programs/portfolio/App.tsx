@@ -23,9 +23,6 @@ const App = ({ children }: AppProps) => {
   const { display: displayDirectory, setDisplay: setDisplayDirectory } =
     directory;
   const { display: displayHelp, setDisplay: setDisplayHelp } = help;
-  const fileMetadata = React.useMemo(() => {
-    return files.find((file) => file.displayName === activeTabId);
-  }, [activeTabId, files]);
 
   const { command } = useCommandListener({});
   useClosePortfolio({ tabs });
@@ -58,8 +55,8 @@ const App = ({ children }: AppProps) => {
           <div></div>
         )}
         <Footer
-          author={fileMetadata?.author}
-          lastModified={fileMetadata?.modified}
+          author={activeTabId.author}
+          lastModified={new Date(activeTabId.modified)}
           command={command}
         />
       </div>

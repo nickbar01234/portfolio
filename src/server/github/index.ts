@@ -1,6 +1,8 @@
 import { UserQuery } from "@/app/api/github/profile/route.schema";
 import { octokit } from "../sdk";
 import { readdirSync, promises as fs } from "fs";
+import { directoryTree } from "../utils";
+import { Directory } from "@/type";
 
 interface GetGithubProfileParams {
   username: string;
@@ -68,49 +70,103 @@ interface GetGithubFileMetadataParams {
   mock?: boolean;
 }
 
+type GetGithubFileMetadataResponse = Awaited<
+  ReturnType<typeof _getGithubFileMetadata>
+>;
+
 export const getGithubFileMetadata = async ({
   username,
   repo,
-  base,
   path,
   mock = process.env.NODE_ENV === "development",
 }: GetGithubFileMetadataParams) => {
-  let paths = mock
-    ? ["About.tsx", "Activity.tsx", "Skills.tsx", "Experience.tsx"]
-    : readdirSync(path)
-        .filter((file) => !file.includes("index.tsx"))
-        .map((file) => `${path}/${file}`);
-
   if (mock) {
-    return paths.map((path) => ({
-      normalizedName: path.split("/").pop()?.split(".")[0] ?? "",
-      path: path,
-      author: username,
-      modified: new Date().toISOString(),
-    }));
+    const res: GetGithubFileMetadataResponse = {
+      absolutePath: "src/components/programs/portfolio/files",
+      displayName: "",
+      files: [
+        {
+          displayName: "About",
+          relativePath: "/about",
+          author: "nickbar01234",
+          modified: "2024-01-09T03:06:38Z",
+        },
+        {
+          displayName: "Activity",
+          relativePath: "/activity",
+          author: "nickbar01234",
+          modified: "2024-01-09T03:06:38Z",
+        },
+        {
+          displayName: "Experience",
+          relativePath: "/experience",
+          author: "nickbar01234",
+          modified: "2024-01-09T15:54:30Z",
+        },
+        {
+          displayName: "Skills",
+          relativePath: "/skills",
+          author: "nickbar01234",
+          modified: "2024-01-09T03:06:38Z",
+        },
+      ],
+      directories: [
+        {
+          absolutePath: "src/components/programs/portfolio/files/blog",
+          displayName: "blog",
+          files: [
+            {
+              displayName: "CreatingNpmPackage",
+              author: "nickbar01234",
+              relativePath: "/blog/creatingnpmpackage",
+              modified: "2024-01-09T03:06:38Z",
+            },
+          ],
+          directories: [],
+        },
+      ],
+    };
+
+    return res;
   }
 
-  const allMetadata = await Promise.all(
-    paths.map(async (path) => {
-      const metadata = await octokit.rest.repos.listCommits({
+  let directory = directoryTree(path, "");
+  return await _getGithubFileMetadata(username, repo, directory);
+};
+
+const _getGithubFileMetadata = async (
+  username: string,
+  repo: string,
+  directory: Directory
+): Promise<Directory<{ author: string; modified: string }>> => {
+  const files = await Promise.all(
+    directory.files.map(async (file) => {
+      console.log(`${directory.absolutePath}/${file.displayName}`);
+      const res = await octokit.rest.repos.listCommits({
         owner: username,
         repo: repo,
         ref: "main",
         per_page: 1,
         page: 1,
-        path: path,
+        path: `${directory.absolutePath}/${file.displayName}`,
       });
 
-      // TODO(nickbar01234) - Handle rate limit 403
-      // TODO(nickbar01234) - Handle empty array
       return {
-        normalizedName: path.split("/").pop()?.split(".")[0] ?? "",
-        path: path,
-        author: metadata.data[0].commit.author?.name ?? username,
-        modified:
-          metadata.data[0].commit.author?.date ?? new Date().toISOString(),
+        ...file,
+        displayName: file.displayName.split(".")[0],
+        author: res.data[0].commit.author?.name ?? username,
+        modified: res.data[0].commit.author?.date ?? new Date().toISOString(),
       };
     })
   );
-  return allMetadata;
+
+  return {
+    ...directory,
+    files: files,
+    directories: await Promise.all(
+      directory.directories.map(async (dir) =>
+        _getGithubFileMetadata(username, repo, dir)
+      )
+    ),
+  };
 };

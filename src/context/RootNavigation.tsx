@@ -1,10 +1,11 @@
 import { PortfolioContext } from "@/context/";
 import { useRouter } from "next/navigation";
 import React from "react";
+import { FullFile } from "./Portfolio";
 
 interface RootNavigationContext {
-  onFileClick: (displayName: string) => void;
-  onFileClose: (displayName: string, event?: React.MouseEvent) => void;
+  onFileClick: (file: FullFile) => void;
+  onFileClose: (file: FullFile, event?: React.MouseEvent) => void;
   navigating: boolean;
   setNavigating: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -18,40 +19,42 @@ const RootNavigationContext = React.createContext<RootNavigationContext>(
 );
 
 const RootNavigation = ({ children }: RootNavigationProps) => {
-  const { files, tabs, setTabs, activeTabId, setActiveTabId } =
+  const { tabs, setTabs, activeTabId, setActiveTabId } =
     React.useContext(PortfolioContext);
   const [navigating, setNavigating] = React.useState(true);
 
   const router = useRouter();
   const onFileClick = React.useCallback(
-    (displayName: string) => {
-      const fileMetadata = files.find(
-        (file) => file.displayName === displayName
-      );
-      if (fileMetadata == undefined || displayName === activeTabId) {
-        return;
+    (file: FullFile) => {
+      setActiveTabId(file);
+      if (!tabs.find((tab) => tab.relativePath === file.relativePath)) {
+        setTabs((prev) => [...prev, file]);
       }
 
-      setActiveTabId(fileMetadata.displayName);
-      if (!tabs.includes(displayName)) {
-        setTabs((prev) => [...prev, displayName]);
+      if (file.relativePath != activeTabId.relativePath) {
+        setNavigating(true);
+        router.push(`/portfolio${file.relativePath}`);
       }
-      setNavigating(true);
-      router.push(`/portfolio/${displayName.toLowerCase()}`);
     },
-    [activeTabId, tabs, setTabs, setActiveTabId, files, router]
+    [tabs, setTabs, activeTabId, setActiveTabId, router]
   );
 
   const onFileClose = React.useCallback(
-    (displayName: string, event?: React.MouseEvent) => {
+    (file: FullFile, event?: React.MouseEvent) => {
       event?.stopPropagation();
 
-      setTabs((tabs) => tabs.filter((tab) => tab !== displayName));
-      if (displayName === activeTabId) {
-        const newActiveTab = tabs.find((tab) => tab !== displayName) ?? "";
-        setNavigating(true);
-        setActiveTabId(newActiveTab);
-        router.push(`/portfolio/${newActiveTab.toLowerCase()}`);
+      setTabs((tabs) =>
+        tabs.filter((tab) => tab.relativePath !== file.relativePath)
+      );
+      if (activeTabId.relativePath === file.relativePath) {
+        const newActiveTab = tabs.find(
+          (tab) => tab.relativePath !== file.relativePath
+        );
+        if (newActiveTab != undefined) {
+          setNavigating(true);
+          setActiveTabId(newActiveTab);
+          router.push(`/portfolio${newActiveTab.relativePath}`);
+        }
       }
     },
     [activeTabId, setActiveTabId, tabs, setTabs, router]
