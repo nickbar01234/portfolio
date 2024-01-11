@@ -141,7 +141,6 @@ const _getGithubFileMetadata = async (
 ): Promise<Directory<{ author: string; modified: string }>> => {
   const files = await Promise.all(
     directory.files.map(async (file) => {
-      console.log(`${directory.absolutePath}/${file.displayName}`);
       const res = await octokit.rest.repos.listCommits({
         owner: username,
         repo: repo,

@@ -25,8 +25,10 @@ interface PortfolioContext {
   tabs: File<FileMetadata>[];
   setTabs: React.Dispatch<React.SetStateAction<File<FileMetadata>[]>>;
 
-  activeTabId: File<FileMetadata>;
-  setActiveTabId: React.Dispatch<React.SetStateAction<File<FileMetadata>>>;
+  activeTabId: File<FileMetadata> | undefined;
+  setActiveTabId: React.Dispatch<
+    React.SetStateAction<File<FileMetadata> | undefined>
+  >;
 
   popups: {
     directory: {
@@ -81,30 +83,18 @@ const Portfolio = ({ fileMetadata, children }: PortfolioProps) => {
     }
   );
 
-  // [Activity, About, Skills, Experience].map((File) => {
-  //   const metadata = fileMetadata.find(
-  //     (metadata) => metadata.normalizedName === File.displayName
-  //   );
-  //   return {
-  //     displayName: File.displayName,
-  //     path: metadata?.path ?? "",
-  //     author: metadata?.author ?? "",
-  //     modified: new Date(metadata?.modified ?? ""),
-  //     Icon: File.Icon,
-  //   };
-  // });
-
   const pathSegment = usePathname();
   const startFile = searchDirectory(files, (file) =>
     pathSegment.endsWith(file.relativePath)
-  )!;
-  const [tabs, setTabs] = React.useState([startFile]);
+  );
+  const [tabs, setTabs] = React.useState(
+    startFile != undefined ? [startFile] : []
+  );
   const [activeTabId, setActiveTabId] = React.useState(startFile);
   const [displayDirectory, setDisplayDirectory] = React.useState(false);
   const [displayHelp, setDisplayHelp] = React.useState(false);
   const [commandListenerActive, setCommandListenerActive] =
     React.useState(false);
-
   return (
     <PortfolioContext.Provider
       value={{

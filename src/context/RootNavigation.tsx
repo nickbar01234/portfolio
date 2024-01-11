@@ -4,8 +4,8 @@ import React from "react";
 import { FullFile } from "./Portfolio";
 
 interface RootNavigationContext {
-  onFileClick: (file: FullFile) => void;
-  onFileClose: (file: FullFile, event?: React.MouseEvent) => void;
+  onFileClick: (file: FullFile | undefined) => void;
+  onFileClose: (file: FullFile | undefined, event?: React.MouseEvent) => void;
   navigating: boolean;
   setNavigating: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -25,13 +25,20 @@ const RootNavigation = ({ children }: RootNavigationProps) => {
 
   const router = useRouter();
   const onFileClick = React.useCallback(
-    (file: FullFile) => {
+    (file: FullFile | undefined) => {
+      if (file == undefined) {
+        return;
+      }
+
       setActiveTabId(file);
       if (!tabs.find((tab) => tab.relativePath === file.relativePath)) {
         setTabs((prev) => [...prev, file]);
       }
 
-      if (file.relativePath != activeTabId.relativePath) {
+      if (
+        activeTabId != undefined &&
+        file.relativePath != activeTabId.relativePath
+      ) {
         setNavigating(true);
         router.push(`/portfolio${file.relativePath}`);
       }
@@ -40,13 +47,20 @@ const RootNavigation = ({ children }: RootNavigationProps) => {
   );
 
   const onFileClose = React.useCallback(
-    (file: FullFile, event?: React.MouseEvent) => {
+    (file: FullFile | undefined, event?: React.MouseEvent) => {
       event?.stopPropagation();
+
+      if (file == undefined) {
+        return;
+      }
 
       setTabs((tabs) =>
         tabs.filter((tab) => tab.relativePath !== file.relativePath)
       );
-      if (activeTabId.relativePath === file.relativePath) {
+      if (
+        activeTabId != undefined &&
+        activeTabId.relativePath === file.relativePath
+      ) {
         const newActiveTab = tabs.find(
           (tab) => tab.relativePath !== file.relativePath
         );

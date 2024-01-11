@@ -1,11 +1,12 @@
 import { RootNavigationContext, PortfolioContext } from "@/context";
-import { Command, whichCommand } from "@/utils";
+import { Command, searchDirectory, whichCommand } from "@/utils";
 import React from "react";
 
 interface UseCommandListenerProps {}
 
 const useCommandListener = (props: UseCommandListenerProps) => {
   const {
+    files,
     activeTabId,
     popups: { directory, help },
     commandListenerActive,
@@ -31,7 +32,11 @@ const useCommandListener = (props: UseCommandListenerProps) => {
 
             switch (whichCommand(command)) {
               case Command.TAB_NEW: {
-                onFileClick(command.split(" ")[1]);
+                const file = searchDirectory(
+                  files,
+                  (file) => file.displayName === command.split(" ")[1]
+                );
+                onFileClick(file);
                 break;
               }
 
@@ -82,6 +87,7 @@ const useCommandListener = (props: UseCommandListenerProps) => {
       }
     },
     [
+      files,
       onFileClick,
       onFileClose,
       commandListenerActive,

@@ -55,8 +55,12 @@ const App = ({ children }: AppProps) => {
           <div></div>
         )}
         <Footer
-          author={activeTabId.author}
-          lastModified={new Date(activeTabId.modified)}
+          author={activeTabId?.author ?? ""}
+          lastModified={
+            activeTabId != undefined
+              ? new Date(activeTabId.modified)
+              : new Date()
+          }
           command={command}
         />
       </div>

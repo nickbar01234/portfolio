@@ -6,7 +6,7 @@ import { FullFile } from "@/context/Portfolio";
 
 interface TabNavigationProps {
   tabs: FullFile[];
-  activeTabId: FullFile;
+  activeTabId: FullFile | undefined;
 }
 
 const TabBar = (props: TabNavigationProps) => {
@@ -17,7 +17,9 @@ const TabBar = (props: TabNavigationProps) => {
     <div className="relative z-20 w-full bg-bg">
       <div className="flex gap-x-4">
         {tabs.map((tab) => {
-          const isActive = tab.relativePath === activeTabId.relativePath;
+          const isActive =
+            activeTabId != undefined &&
+            tab.relativePath === activeTabId.relativePath;
           return (
             <div
               className={`text-sm flex items-center gap-x-1.5 hover:comment-variant hover:border-b hover:border-b-comment cursor-pointer ${
