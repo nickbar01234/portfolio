@@ -1,5 +1,7 @@
+import { CreatingNpmPackage } from "@/components/programs/portfolio/files";
+
 const Page = () => {
-  return null;
+  return <CreatingNpmPackage />;
 };
 
 export default Page;
