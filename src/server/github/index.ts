@@ -1,6 +1,6 @@
 import { UserQuery } from "@/app/api/github/profile/route.schema";
 import { octokit } from "../sdk";
-import { readdirSync, promises as fs } from "fs";
+import { promises as fs } from "fs";
 import { directoryTree } from "../utils";
 import { Directory } from "@/type";
 
